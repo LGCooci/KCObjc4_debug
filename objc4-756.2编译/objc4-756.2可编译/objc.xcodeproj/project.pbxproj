@@ -40,8 +40,8 @@
 		75A9504F202BAA0600D7D56F /* objc-locks-new.h in Headers */ = {isa = PBXBuildFile; fileRef = 75A9504E202BAA0300D7D56F /* objc-locks-new.h */; };
 		75A95051202BAA9A00D7D56F /* objc-locks.h in Headers */ = {isa = PBXBuildFile; fileRef = 75A95050202BAA9A00D7D56F /* objc-locks.h */; };
 		75A95053202BAC4100D7D56F /* objc-lockdebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 75A95052202BAC4100D7D56F /* objc-lockdebug.h */; };
-		7AD83D41234C58D2009A0C95 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD83D40234C58D2009A0C95 /* main.m */; };
-		7AD83D47234C58FD009A0C95 /* libobjc.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC0630554660B00DB518D /* libobjc.A.dylib */; };
+		7A7CA115234CCEDA0099B205 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7CA114234CCEDA0099B205 /* main.m */; };
+		7A7CA119234CCF430099B205 /* libobjc.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC0630554660B00DB518D /* libobjc.A.dylib */; };
 		8306440920D24A5D00E356D2 /* objc-block-trampolines.h in Headers */ = {isa = PBXBuildFile; fileRef = 8306440620D24A3E00E356D2 /* objc-block-trampolines.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		830F2A740D737FB800392440 /* objc-msg-arm.s in Sources */ = {isa = PBXBuildFile; fileRef = 830F2A690D737FB800392440 /* objc-msg-arm.s */; };
 		830F2A750D737FB900392440 /* objc-msg-i386.s in Sources */ = {isa = PBXBuildFile; fileRef = 830F2A6A0D737FB800392440 /* objc-msg-i386.s */; };
@@ -125,7 +125,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7AD83D45234C58EB009A0C95 /* PBXContainerItemProxy */ = {
+		7A7CA11A234CD02B0099B205 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F9BCC6CA205C68E800DD9AFC;
+			remoteInfo = "objc-trampolines";
+		};
+		7A7CA11C234CD0320099B205 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
@@ -139,17 +146,10 @@
 			remoteGlobalIDString = D2AAC0620554660B00DB518D;
 			remoteInfo = objc;
 		};
-		F9BCC728205C6A0900DD9AFC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F9BCC6CA205C68E800DD9AFC;
-			remoteInfo = "objc-trampolines";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		7AD83D3C234C58D2009A0C95 /* CopyFiles */ = {
+		7A7CA110234CCEDA0099B205 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -169,8 +169,8 @@
 		75A9504E202BAA0300D7D56F /* objc-locks-new.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "objc-locks-new.h"; path = "runtime/objc-locks-new.h"; sourceTree = "<group>"; };
 		75A95050202BAA9A00D7D56F /* objc-locks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-locks.h"; path = "runtime/objc-locks.h"; sourceTree = "<group>"; };
 		75A95052202BAC4100D7D56F /* objc-lockdebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-lockdebug.h"; path = "runtime/objc-lockdebug.h"; sourceTree = "<group>"; };
-		7AD83D3E234C58D2009A0C95 /* KC_DebugObjc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KC_DebugObjc; sourceTree = BUILT_PRODUCTS_DIR; };
-		7AD83D40234C58D2009A0C95 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7A7CA112234CCEDA0099B205 /* KCDebugObjc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KCDebugObjc; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A7CA114234CCEDA0099B205 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8306440620D24A3E00E356D2 /* objc-block-trampolines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "objc-block-trampolines.h"; path = "runtime/objc-block-trampolines.h"; sourceTree = "<group>"; };
 		830F2A690D737FB800392440 /* objc-msg-arm.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; name = "objc-msg-arm.s"; path = "runtime/Messengers.subproj/objc-msg-arm.s"; sourceTree = "<group>"; };
 		830F2A6A0D737FB800392440 /* objc-msg-i386.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; name = "objc-msg-i386.s"; path = "runtime/Messengers.subproj/objc-msg-i386.s"; sourceTree = "<group>"; };
@@ -262,11 +262,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7AD83D3B234C58D2009A0C95 /* Frameworks */ = {
+		7A7CA10F234CCEDA0099B205 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AD83D47234C58FD009A0C95 /* libobjc.A.dylib in Frameworks */,
+				7A7CA119234CCF430099B205 /* libobjc.A.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,7 +298,7 @@
 				838486270D6D690F00CEA253 /* Obsolete Source */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				838485B20D6D67F900CEA253 /* Other */,
-				7AD83D3F234C58D2009A0C95 /* KC_DebugObjc */,
+				7A7CA113234CCEDA0099B205 /* KCDebugObjc */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 				F9BCC72A205C6A1600DD9AFC /* Frameworks */,
 			);
@@ -361,17 +361,17 @@
 			children = (
 				D2AAC0630554660B00DB518D /* libobjc.A.dylib */,
 				F9BCC727205C68E800DD9AFC /* libobjc-trampolines.dylib */,
-				7AD83D3E234C58D2009A0C95 /* KC_DebugObjc */,
+				7A7CA112234CCEDA0099B205 /* KCDebugObjc */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7AD83D3F234C58D2009A0C95 /* KC_DebugObjc */ = {
+		7A7CA113234CCEDA0099B205 /* KCDebugObjc */ = {
 			isa = PBXGroup;
 			children = (
-				7AD83D40234C58D2009A0C95 /* main.m */,
+				7A7CA114234CCEDA0099B205 /* main.m */,
 			);
-			path = KC_DebugObjc;
+			path = KCDebugObjc;
 			sourceTree = "<group>";
 		};
 		838485B20D6D67F900CEA253 /* Other */ = {
@@ -534,22 +534,22 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		7AD83D3D234C58D2009A0C95 /* KC_DebugObjc */ = {
+		7A7CA111234CCEDA0099B205 /* KCDebugObjc */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7AD83D44234C58D2009A0C95 /* Build configuration list for PBXNativeTarget "KC_DebugObjc" */;
+			buildConfigurationList = 7A7CA116234CCEDA0099B205 /* Build configuration list for PBXNativeTarget "KCDebugObjc" */;
 			buildPhases = (
-				7AD83D3A234C58D2009A0C95 /* Sources */,
-				7AD83D3B234C58D2009A0C95 /* Frameworks */,
-				7AD83D3C234C58D2009A0C95 /* CopyFiles */,
+				7A7CA10E234CCEDA0099B205 /* Sources */,
+				7A7CA10F234CCEDA0099B205 /* Frameworks */,
+				7A7CA110234CCEDA0099B205 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7AD83D46234C58EB009A0C95 /* PBXTargetDependency */,
+				7A7CA11D234CD0320099B205 /* PBXTargetDependency */,
 			);
-			name = KC_DebugObjc;
-			productName = KC_DebugObjc;
-			productReference = 7AD83D3E234C58D2009A0C95 /* KC_DebugObjc */;
+			name = KCDebugObjc;
+			productName = KCDebugObjc;
+			productReference = 7A7CA112234CCEDA0099B205 /* KCDebugObjc */;
 			productType = "com.apple.product-type.tool";
 		};
 		D2AAC0620554660B00DB518D /* objc */ = {
@@ -565,7 +565,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				F9BCC729205C6A0900DD9AFC /* PBXTargetDependency */,
+				7A7CA11B234CD02B0099B205 /* PBXTargetDependency */,
 			);
 			name = objc;
 			productName = objc;
@@ -598,7 +598,7 @@
 				BuildIndependentTargetsInParallel = NO;
 				LastUpgradeCheck = 0440;
 				TargetAttributes = {
-					7AD83D3D234C58D2009A0C95 = {
+					7A7CA111234CCEDA0099B205 = {
 						CreatedOnToolsVersion = 11.0;
 						DevelopmentTeam = U5LAHK8PW6;
 						ProvisioningStyle = Automatic;
@@ -631,7 +631,7 @@
 				837F67A81A771F63004D34FA /* objc-simulator */,
 				F9BCC6CA205C68E800DD9AFC /* objc-trampolines */,
 				834F9B01212E560100F95A54 /* objc4_tests */,
-				7AD83D3D234C58D2009A0C95 /* KC_DebugObjc */,
+				7A7CA111234CCEDA0099B205 /* KCDebugObjc */,
 			);
 		};
 /* End PBXProject section */
@@ -687,11 +687,11 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7AD83D3A234C58D2009A0C95 /* Sources */ = {
+		7A7CA10E234CCEDA0099B205 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AD83D41234C58D2009A0C95 /* main.m in Sources */,
+				7A7CA115234CCEDA0099B205 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -758,20 +758,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7AD83D46234C58EB009A0C95 /* PBXTargetDependency */ = {
+		7A7CA11B234CD02B0099B205 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F9BCC6CA205C68E800DD9AFC /* objc-trampolines */;
+			targetProxy = 7A7CA11A234CD02B0099B205 /* PBXContainerItemProxy */;
+		};
+		7A7CA11D234CD0320099B205 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D2AAC0620554660B00DB518D /* objc */;
-			targetProxy = 7AD83D45234C58EB009A0C95 /* PBXContainerItemProxy */;
+			targetProxy = 7A7CA11C234CD0320099B205 /* PBXContainerItemProxy */;
 		};
 		837F67AD1A771F6E004D34FA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D2AAC0620554660B00DB518D /* objc */;
 			targetProxy = 837F67AC1A771F6E004D34FA /* PBXContainerItemProxy */;
-		};
-		F9BCC729205C6A0900DD9AFC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F9BCC6CA205C68E800DD9AFC /* objc-trampolines */;
-			targetProxy = F9BCC728205C6A0900DD9AFC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1022,7 +1022,7 @@
 			};
 			name = Release;
 		};
-		7AD83D42234C58D2009A0C95 /* Debug */ = {
+		7A7CA117234CCEDA0099B205 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1078,7 +1078,7 @@
 			};
 			name = Debug;
 		};
-		7AD83D43234C58D2009A0C95 /* Release */ = {
+		7A7CA118234CCEDA0099B205 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1255,11 +1255,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7AD83D44234C58D2009A0C95 /* Build configuration list for PBXNativeTarget "KC_DebugObjc" */ = {
+		7A7CA116234CCEDA0099B205 /* Build configuration list for PBXNativeTarget "KCDebugObjc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7AD83D42234C58D2009A0C95 /* Debug */,
-				7AD83D43234C58D2009A0C95 /* Release */,
+				7A7CA117234CCEDA0099B205 /* Debug */,
+				7A7CA118234CCEDA0099B205 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
