@@ -1,0 +1,588 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		3F23D0731A4757F4008445C3 /* Blocks-simulator */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 3F23D0741A4757F4008445C3 /* Build configuration list for PBXAggregateTarget "Blocks-simulator" */;
+			buildPhases = (
+				3F23D07A1A4758F9008445C3 /* Comment about this target */,
+			);
+			dependencies = (
+				3F23D0781A4757FF008445C3 /* PBXTargetDependency */,
+			);
+			name = "Blocks-simulator";
+			productName = "Blocks-simulator";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		831D5AD6122788D500E4A1EC /* Block_private.h in Headers */ = {isa = PBXBuildFile; fileRef = E86E1EBF11543C0B0055083F /* Block_private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		831D5AD7122788D500E4A1EC /* Block.h in Headers */ = {isa = PBXBuildFile; fileRef = E86E1EC011543C0B0055083F /* Block.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		831D5AD9122788D500E4A1EC /* data.c in Sources */ = {isa = PBXBuildFile; fileRef = E86E1EC111543C0B0055083F /* data.c */; };
+		831D5ADA122788D500E4A1EC /* runtime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E86E1EC211543C0B0055083F /* runtime.cpp */; };
+		96EF759B1507C27500581A2E /* data.c in Sources */ = {isa = PBXBuildFile; fileRef = E86E1EC111543C0B0055083F /* data.c */; };
+		96EF759C1507C27500581A2E /* runtime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E86E1EC211543C0B0055083F /* runtime.cpp */; };
+		E86E1EC311543C0B0055083F /* Block_private.h in Headers */ = {isa = PBXBuildFile; fileRef = E86E1EBF11543C0B0055083F /* Block_private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		E86E1EC411543C0B0055083F /* Block.h in Headers */ = {isa = PBXBuildFile; fileRef = E86E1EC011543C0B0055083F /* Block.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E86E1EC511543C0B0055083F /* data.c in Sources */ = {isa = PBXBuildFile; fileRef = E86E1EC111543C0B0055083F /* data.c */; };
+		E86E1EC611543C0B0055083F /* runtime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E86E1EC211543C0B0055083F /* runtime.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3F23D0771A4757FF008445C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC0C605546C1D00DB518D;
+			remoteInfo = Blocks;
+		};
+		96FA3B6715093BCF003EABC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC0C605546C1D00DB518D;
+			remoteInfo = Blocks;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		831D5ADF122788D500E4A1EC /* libclosure.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libclosure.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		96EF75961507C1CE00581A2E /* libclosure.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libclosure.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC0C705546C1D00DB518D /* libsystem_blocks.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libsystem_blocks.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		E86E1EBF11543C0B0055083F /* Block_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block_private.h; sourceTree = "<group>"; };
+		E86E1EC011543C0B0055083F /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
+		E86E1EC111543C0B0055083F /* data.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = data.c; sourceTree = "<group>"; };
+		E86E1EC211543C0B0055083F /* runtime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = runtime.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		831D5ADB122788D500E4A1EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96EF75931507C1CE00581A2E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC0C505546C1D00DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC0C705546C1D00DB518D /* libsystem_blocks.dylib */,
+				831D5ADF122788D500E4A1EC /* libclosure.a */,
+				96EF75961507C1CE00581A2E /* libclosure.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77AEFE84172EC02AAC07 /* Sources */,
+				32C88DFF0371C24200C91783 /* Headers */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = Blocks;
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				E86E1EC111543C0B0055083F /* data.c */,
+				E86E1EC211543C0B0055083F /* runtime.cpp */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				E86E1EBF11543C0B0055083F /* Block_private.h */,
+				E86E1EC011543C0B0055083F /* Block.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		831D5AD5122788D500E4A1EC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				831D5AD6122788D500E4A1EC /* Block_private.h in Headers */,
+				831D5AD7122788D500E4A1EC /* Block.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96EF75941507C1CE00581A2E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC0C305546C1D00DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E86E1EC311543C0B0055083F /* Block_private.h in Headers */,
+				E86E1EC411543C0B0055083F /* Block.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		831D5AD4122788D500E4A1EC /* Blocks-bundle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 831D5ADC122788D500E4A1EC /* Build configuration list for PBXNativeTarget "Blocks-bundle" */;
+			buildPhases = (
+				831D5AD5122788D500E4A1EC /* Headers */,
+				831D5AD8122788D500E4A1EC /* Sources */,
+				831D5ADB122788D500E4A1EC /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Blocks-bundle";
+			productName = "Blocks-simulator2";
+			productReference = 831D5ADF122788D500E4A1EC /* libclosure.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		96EF75951507C1CE00581A2E /* libclosure_eOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96EF75991507C1CE00581A2E /* Build configuration list for PBXNativeTarget "libclosure_eOS" */;
+			buildPhases = (
+				96EF75921507C1CE00581A2E /* Sources */,
+				96EF75931507C1CE00581A2E /* Frameworks */,
+				96EF75941507C1CE00581A2E /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				96FA3B6815093BCF003EABC7 /* PBXTargetDependency */,
+			);
+			name = libclosure_eOS;
+			productName = libclosure_eOS;
+			productReference = 96EF75961507C1CE00581A2E /* libclosure.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D2AAC0C605546C1D00DB518D /* Blocks */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB917D08733D990010E9CD /* Build configuration list for PBXNativeTarget "Blocks" */;
+			buildPhases = (
+				D2AAC0C305546C1D00DB518D /* Headers */,
+				D2AAC0C405546C1D00DB518D /* Sources */,
+				D2AAC0C505546C1D00DB518D /* Frameworks */,
+				3F23D0791A47587A008445C3 /* Simulator Build Compat Symlink */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Blocks;
+			productName = Blocks;
+			productReference = D2AAC0C705546C1D00DB518D /* libsystem_blocks.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				TargetAttributes = {
+					3F23D0731A4757F4008445C3 = {
+						CreatedOnToolsVersion = 6.3;
+					};
+				};
+			};
+			buildConfigurationList = 1DEB918108733D990010E9CD /* Build configuration list for PBXProject "Blocks" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* Blocks */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC0C605546C1D00DB518D /* Blocks */,
+				831D5AD4122788D500E4A1EC /* Blocks-bundle */,
+				96EF75951507C1CE00581A2E /* libclosure_eOS */,
+				3F23D0731A4757F4008445C3 /* Blocks-simulator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3F23D0791A47587A008445C3 /* Simulator Build Compat Symlink */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Simulator Build Compat Symlink";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = "/bin/bash -ex";
+			shellScript = "if [[ \"${PLATFORM_NAME}\" =~ \"simulator\" ]]; then\nln -s libsystem_blocks.dylib ${DSTROOT}${INSTALL_PATH}/libsystem_sim_blocks.dylib\nfi\n";
+		};
+		3F23D07A1A4758F9008445C3 /* Comment about this target */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Comment about this target";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "# This target is only here for B&I compatibility.  Cortex should be\n# updated to use the Blocks target and then this target can be\n# removed.\n\ntrue";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		831D5AD8122788D500E4A1EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				831D5AD9122788D500E4A1EC /* data.c in Sources */,
+				831D5ADA122788D500E4A1EC /* runtime.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96EF75921507C1CE00581A2E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96EF759B1507C27500581A2E /* data.c in Sources */,
+				96EF759C1507C27500581A2E /* runtime.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC0C405546C1D00DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E86E1EC511543C0B0055083F /* data.c in Sources */,
+				E86E1EC611543C0B0055083F /* runtime.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3F23D0781A4757FF008445C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC0C605546C1D00DB518D /* Blocks */;
+			targetProxy = 3F23D0771A4757FF008445C3 /* PBXContainerItemProxy */;
+		};
+		96FA3B6815093BCF003EABC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC0C605546C1D00DB518D /* Blocks */;
+			targetProxy = 96FA3B6715093BCF003EABC7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB917E08733D990010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					"$(DSTROOT)/usr/include/**",
+					"$(DSTROOT)/usr/local/include/**",
+					"$(CONFIGURATION_BUILD_DIR)/usr/include/**",
+					"$(CONFIGURATION_BUILD_DIR)/usr/local/include/**",
+				);
+				INSTALL_PATH = /usr/lib/system;
+				OTHER_LDFLAGS = (
+					"-nostdlib",
+					"-L/usr/lib/system/",
+					"-lsystem_platform",
+					"-lsystem_malloc",
+					"-Wl,-upward-lsystem_c",
+					"-ldyld",
+					"-Wl,-umbrella,System",
+				);
+				PRODUCT_NAME = system_blocks;
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/include;
+				SUPPORTS_TEXT_BASED_API = YES;
+				TAPI_VERIFY_MODE = ErrorsAndWarnings;
+			};
+			name = Debug;
+		};
+		1DEB917F08733D990010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					"$(DSTROOT)/usr/include/**",
+					"$(DSTROOT)/usr/local/include/**",
+					"$(CONFIGURATION_BUILD_DIR)/usr/include/**",
+					"$(CONFIGURATION_BUILD_DIR)/usr/local/include/**",
+				);
+				INSTALL_PATH = /usr/lib/system;
+				OTHER_LDFLAGS = (
+					"-nostdlib",
+					"-L/usr/lib/system/",
+					"-lsystem_platform",
+					"-lsystem_malloc",
+					"-Wl,-upward-lsystem_c",
+					"-ldyld",
+					"-Wl,-umbrella,System",
+				);
+				PRODUCT_NAME = system_blocks;
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/include;
+				SUPPORTS_TEXT_BASED_API = YES;
+				TAPI_VERIFY_MODE = ErrorsAndWarnings;
+			};
+			name = Release;
+		};
+		1DEB918208733D990010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_VARIANTS = (
+					profile,
+					debug,
+					normal,
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = "$(RC_ProjectSourceVersion)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = "$(RC_ProjectSourceVersion)";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IS_ZIPPERED = YES;
+				PREBINDING = NO;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
+				USE_HEADERMAP = NO;
+				VERSIONING_SYSTEM = "apple-generic";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+				);
+			};
+			name = Debug;
+		};
+		1DEB918308733D990010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_VARIANTS = (
+					profile,
+					debug,
+					normal,
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CURRENT_PROJECT_VERSION = "$(RC_ProjectSourceVersion)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = "$(RC_ProjectSourceVersion)";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IS_ZIPPERED = YES;
+				"OTHER_CFLAGS[arch=i386]" = "-momit-leaf-frame-pointer";
+				"OTHER_CFLAGS[arch=x86_64]" = "-momit-leaf-frame-pointer";
+				PREBINDING = NO;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
+				USE_HEADERMAP = NO;
+				VERSIONING_SYSTEM = "apple-generic";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+				);
+			};
+			name = Release;
+		};
+		3F23D0751A4757F4008445C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3F23D0761A4757F4008445C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		831D5ADD122788D500E4A1EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(DSTROOT)/usr/include/**",
+					"$(DSTROOT)/usr/local/include/**",
+					"$(CONFIGURATION_BUILD_DIR)/usr/include/**",
+					"$(CONFIGURATION_BUILD_DIR)/usr/local/include/**",
+				);
+				INSTALL_PATH = "$(INDIGO_INSTALL_PATH_PREFIX)/usr/local/lib/system";
+				PRODUCT_NAME = closure;
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/include;
+				SUPPORTS_TEXT_BASED_API = YES;
+				TAPI_VERIFY_MODE = ErrorsAndWarnings;
+			};
+			name = Debug;
+		};
+		831D5ADE122788D500E4A1EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(DSTROOT)/usr/include/**",
+					"$(DSTROOT)/usr/local/include/**",
+					"$(CONFIGURATION_BUILD_DIR)/usr/include/**",
+					"$(CONFIGURATION_BUILD_DIR)/usr/local/include/**",
+				);
+				INSTALL_PATH = "$(INDIGO_INSTALL_PATH_PREFIX)/usr/local/lib/system";
+				PRODUCT_NAME = closure;
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/include;
+				SUPPORTS_TEXT_BASED_API = YES;
+				TAPI_VERIFY_MODE = ErrorsAndWarnings;
+			};
+			name = Release;
+		};
+		96EF75971507C1CE00581A2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				EXECUTABLE_PREFIX = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INSTALL_PATH = /usr/local/lib/eOS;
+				PRODUCT_NAME = libclosure;
+				SUPPORTS_TEXT_BASED_API = YES;
+				TAPI_VERIFY_MODE = ErrorsAndWarnings;
+			};
+			name = Debug;
+		};
+		96EF75981507C1CE00581A2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				EXECUTABLE_PREFIX = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INSTALL_PATH = /usr/local/lib/eOS;
+				PRODUCT_NAME = libclosure;
+				SUPPORTS_TEXT_BASED_API = YES;
+				TAPI_VERIFY_MODE = ErrorsAndWarnings;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB917D08733D990010E9CD /* Build configuration list for PBXNativeTarget "Blocks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB917E08733D990010E9CD /* Debug */,
+				1DEB917F08733D990010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB918108733D990010E9CD /* Build configuration list for PBXProject "Blocks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB918208733D990010E9CD /* Debug */,
+				1DEB918308733D990010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F23D0741A4757F4008445C3 /* Build configuration list for PBXAggregateTarget "Blocks-simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F23D0751A4757F4008445C3 /* Debug */,
+				3F23D0761A4757F4008445C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		831D5ADC122788D500E4A1EC /* Build configuration list for PBXNativeTarget "Blocks-bundle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				831D5ADD122788D500E4A1EC /* Debug */,
+				831D5ADE122788D500E4A1EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		96EF75991507C1CE00581A2E /* Build configuration list for PBXNativeTarget "libclosure_eOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96EF75971507C1CE00581A2E /* Debug */,
+				96EF75981507C1CE00581A2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}

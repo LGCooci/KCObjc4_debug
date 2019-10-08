@@ -1,0 +1,105 @@
+.Dd April 12, 2002
+.Dt ConsoleMessage 8 
+.Os Darwin
+.Sh NAME
+.Nm ConsoleMessage
+.\" The following lines are read in generating the apropos(man -k) database. Use only key
+.\" words here as the database is built based on the words here and in the .ND line. 
+.\" Use .Nm macro to designate other names for the documented program.
+.Nd Send a message to 
+.Nm SystemStarter
+.Sh SYNOPSIS
+.Nm
+.Op Fl v
+.Ar message
+.Nm
+.Op Fl v
+.Fl S
+.Nm
+.Op Fl v
+.Fl F
+.Nm
+.Op Fl v
+.Fl s Ar service
+.Nm
+.Op Fl v
+.Fl f Ar service
+.Nm
+.Op Fl v
+.Fl q Ar setting
+.Nm
+.Op Fl v
+.Fl b Ar path
+.Nm
+.Op Fl v
+.Fl u
+.Sh DESCRIPTION
+The 
+.Nm 
+utility may be used by startup item scripts to send messages to
+.Nm SystemStarter
+(see SystemStarter(8)).
+.Pp
+The default behavior is to send the specified
+.Ar message
+to
+.Nm SystemStarter
+to be displayed on the console.
+.Nm SystemStarter
+will attempt to localize the string using the current startup item's localization dictionaries.
+.Pp
+.Nm
+may also be used to give feedback to
+.Nm SystemStarter
+indicating which services provided by the startup item have succeeded or failed.
+.Sh OPTIONS
+.Bl -tag -width -indent
+.It Fl v
+verbose mode (prints errors to stdout)
+.It Fl S
+mark all services provided by this item as successful
+.It Fl F
+mark all services provided by this item as failed
+.It Fl s
+mark the 
+.Ar service
+as successful
+.It Fl f
+mark the 
+.Ar service
+as failed
+.It Fl q
+query
+.Nm SystemStarter
+for the value of the configuration variable
+.Ar setting 
+(result will be printed to stdout).
+.It Fl b
+Tell 
+.Nm SystemStarter
+to load the display bundle at the specified
+.Ar path
+.It Fl u
+Tell
+.Nm SystemStarter
+to unload the current display bundle
+.El
+.Sh NOTES
+When a 
+.Ar service
+name is not specified,
+.Nm
+assumes its parent process identification (see getppid(2)) is that of a startup item script, and uses that token to find the correct list of services provided by the current item. If the process calling
+.Nm
+is not a startup item script, it is necessary to explicitly provide
+.Ar service
+names.
+.Sh SEE ALSO 
+.\" List links in ascending order by section, alphabetically within a section.
+.\" Please do not reference files that do not exist without filing a bug report
+.Xr SystemStarter 8
+.\" .Sh BUGS              \" Document known, unremedied bugs 
+.Sh HISTORY
+The
+.Nm
+utility appeared in Darwin 6.0

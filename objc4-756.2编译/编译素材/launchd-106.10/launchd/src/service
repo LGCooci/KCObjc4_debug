@@ -1,0 +1,165 @@
+#!/bin/sh
+
+set -e
+
+# don't let people kill us. We shouldn't be long, so this isn't a big deal.
+
+trap "" TSTP
+trap "" HUP
+trap "" INT
+trap "" QUIT
+trap "" TERM
+
+function restart_xinetd ()
+{
+	lockfile -r-1 /var/run/.xinetd-restart.lock
+	kill -HUP $(cat /var/run/xinetd.pid 2>/dev/null) 2>/dev/null || /usr/sbin/xinetd -pidfile /var/run/xinetd.pid
+	rm -f /var/run/.xinetd-restart.lock
+}
+
+function restart_xinetd_hard ()
+{
+	lockfile -r-1 /var/run/.xinetd-restart.lock
+	kill -TERM $(cat /var/run/xinetd.pid 2>/dev/null) 2>/dev/null || echo >/dev/null
+	kill -0 $(cat /var/run/xinetd.pid 2>/dev/null) 2>/dev/null && sleep 1
+	/usr/sbin/xinetd -pidfile /var/run/xinetd.pid
+	rm -f /var/run/.xinetd-restart.lock
+}
+
+if [ $# -eq 0 ]
+then
+   echo "Usage: $(basename $0) --list | <service-name> <command>" >&2
+   exit 1
+fi
+
+if [ "$1" == "--list" ]
+then
+	echo smtp
+	echo fax-receive
+	cd /etc/xinetd.d 2>/dev/null
+	ls -1
+	cd /System/Library/LaunchDaemons 2>/dev/null
+	ls -1 | egrep '.plist$' | sed 's,.plist$,,g'
+	exit 0
+elif [ "$1" == "--test-if-configured-on" ]
+then
+	if [ -f "/etc/xinetd.d/$2" ]
+	then
+		egrep "disable.*=.*no" /etc/xinetd.d/$2 >/dev/null 2>&1
+		exit $?
+	fi
+	if [ -f /System/Library/LaunchDaemons/$2.plist ]
+	then
+		IS_OFF=$(defaults read /System/Library/LaunchDaemons/$2 Disabled 2>/dev/null || true)
+		if [ "$IS_OFF" = 1 ]
+		then
+			exit 1
+		else
+			exit 0
+		fi
+	fi
+	if [ "$2" = "smtp" ]
+	then
+		egrep '^MAILSERVER.*-YES-' /etc/hostconfig >/dev/null 2>&1
+		exit $? 
+	fi
+	if [ "$2" = "fax-receive" ]
+	then
+		egrep '^fax.*unknown.*on$' /etc/ttys >/dev/null 2>&1
+		exit $? 
+	fi
+	exit 1
+elif [ "$1" == "--test-if-available" ]
+then
+	[ -f /System/Library/LaunchDaemons/$2.plist ] && exit 0
+	[ "$2" = "smtp" ] && exit 0
+	[ "$2" = "fax-receive" ] && exit 0
+	[ ! -f "/etc/xinetd.d/$2" ] && exit 1
+	SERVER_FILE=$(egrep 'server[ 	]' "/etc/xinetd.d/$2" | sed 's,.*server[ 	]*=[ 	]*\(.*\),\1,g')
+	[ ! -f "$SERVER_FILE" ] && exit 1
+	exit 0
+elif [ -f "/etc/xinetd.d/$1" ]
+then
+	if [ $UID != 0 ]
+	then
+		echo "You must be root to run this option" >&2
+		exit 1
+	fi
+	# yes, /var/run is gross, but it is tmp directory cleaned up a boot,
+	# writable only by root (so i don't need to worry about the security
+	# implications of mktemp)
+	TMPFILE=$(mktemp /var/run/xinetd.tmp.$$.XXXXXX)
+	cp -f "/etc/xinetd.d/$1" $TMPFILE
+	if [ "$2" == start ]
+	then
+		sed 's/disable.*=.*/disable = no/g' < $TMPFILE > "/etc/xinetd.d/$1"
+		restart_xinetd
+	elif [ "$2" == stop ]
+	then
+		sed 's/disable.*=.*/disable = yes/g' < $TMPFILE > "/etc/xinetd.d/$1"
+		if [ "$1" == "nmbd" ]
+		then
+			restart_xinetd_hard
+			kill -TERM $(cat /var/run/nmbd.pid) || echo >/dev/null
+		else
+			restart_xinetd
+		fi
+	else
+		echo "No such service command" >&2
+	fi
+	rm -f $TMPFILE
+elif [ -f "/System/Library/LaunchDaemons/$1.plist" ]
+then
+	[ "$2" == start ] && launchctl load -w /System/Library/LaunchDaemons/$1.plist
+	[ "$2" == stop  ] && launchctl unload -w /System/Library/LaunchDaemons/$1.plist
+elif [ "$1" = "smtp" ]
+then
+	if [ $UID != 0 ]
+	then
+		echo "You must be root to run this option" >&2
+		exit 1
+	fi
+	TMPFILE=$(mktemp /var/run/xinetd.tmp.$$.XXXXXX)
+	cp -f /etc/hostconfig $TMPFILE
+	if [ "$2" == start ]
+	then
+		if grep -q MAILSERVER=-NO- /etc/hostconfig ; then
+			sed 's,^MAILSERVER=-NO-,MAILSERVER=-YES-,g' < $TMPFILE > /etc/hostconfig
+		fi
+		postfix start
+		postfix flush
+	elif [ "$2" == stop ]
+	then
+		if grep -q MAILSERVER=-YES- /etc/hostconfig ; then
+			sed 's,^MAILSERVER=-YES-,MAILSERVER=-NO-,g' < $TMPFILE > /etc/hostconfig
+		fi
+		postfix stop
+	else
+		echo "No such service command" >&2
+	fi
+	rm -f $TMPFILE
+elif [ "$1" = "fax-receive" ]
+then
+	if [ $UID != 0 ]
+	then
+		echo "You must be root to run this option" >&2
+		exit 1
+	fi
+	TMPFILE=$(mktemp /var/run/xinetd.tmp.$$.XXXXXX)
+	cp -f /etc/ttys $TMPFILE
+	if [ "$2" == start ]
+	then
+		sed 's,^fax\(.*\)off$,fax\1on,g' < $TMPFILE > /etc/ttys
+		kill -HUP 1
+	elif [ "$2" == stop ]
+	then
+		sed 's,^fax\(.*\)on$,fax\1off,g' < $TMPFILE > /etc/ttys
+		kill -HUP 1
+	else
+		echo "No such service command" >&2
+	fi
+	rm -f $TMPFILE
+else
+	echo "No such service $1" >&2
+	exit 1
+fi

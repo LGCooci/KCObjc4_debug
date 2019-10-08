@@ -1,0 +1,79 @@
+#!/bin/sh
+
+##
+# Network Information Service
+##
+
+. /etc/rc.common
+
+
+Startyppasswdd()
+{
+    # rpc.yppasswdd is run on NIS masters
+    if [ -f "${VARYP}/${NISDOMAIN}/ypservers.db" ]; then
+        NISMASTER=$(makedbm -U "${VARYP}/${NISDOMAIN}/ypservers" | sed -n '/YP_MASTER_NAME/p' | awk '{print $2}')
+        if [ "$NISMASTER" = "$(hostname)" ]; then
+            rpc.yppasswdd
+        fi
+    fi
+}
+
+StartService ()
+{
+    ##
+    # Network Information Service.
+    ##
+    CheckForNetwork
+    if [ -f /var/run/NIS.StartupItem -o "${NETWORKUP}" = "-NO-" ]; then exit; fi
+    touch /var/run/NIS.StartupItem
+
+    if [ "${NISDOMAIN:=-NO-}" != "-NO-" ]; then
+
+        VARYP=/var/yp
+
+        echo "Starting Network Information Service"
+
+        echo "Setting NIS domainname to ${NISDOMAIN}"
+        domainname "${NISDOMAIN}"
+
+        # ypserv is run on NIS servers - machines with an ${VARYP}/${NISDOMAIN} dir
+        if [ -d "${VARYP}/${NISDOMAIN}" ]; then
+            if ! pid=$(GetPID ypserv); then
+                ypserv
+            fi
+        fi
+
+        Startyppasswdd
+
+        # ypbind is run on all NIS clients
+        ypbind
+    fi
+}
+
+StopService ()
+{
+    echo "Stopping Network Information Service"
+    killall -TERM ypbind > /dev/null 2>&1
+    killall -TERM rpc.yppasswdd > /dev/null 2>&1
+
+    if pid=$(GetPID ypserv); then
+        kill -TERM "${pid}"
+    fi
+}
+
+RestartService ()
+{
+    echo "Restarting Network Information Service"
+    killall -TERM ypbind > /dev/null 2>&1
+    killall -TERM rpc.yppasswdd > /dev/null 2>&1
+
+    if pid=$(GetPID ypserv); then
+        kill -HUP "${pid}"
+        Startyppasswdd
+        ypbind
+    else
+        StartService
+    fi
+}
+
+RunService "$1"

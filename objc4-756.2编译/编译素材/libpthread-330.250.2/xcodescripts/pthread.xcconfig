@@ -1,0 +1,80 @@
+#include "<DEVELOPER_DIR>/Makefiles/CoreOS/Xcode/BSD.xcconfig"
+
+SDKROOT = macosx.internal
+SUPPORTED_PLATFORMS = macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator
+BUILD_VARIANTS = normal debug
+
+INSTALL_PATH = /usr/lib/system
+EXECUTABLE_PREFIX = lib
+PRODUCT_NAME = system_pthread
+PUBLIC_HEADERS_FOLDER_PATH = /usr/include/pthread
+PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include/pthread
+
+SRCROOT_SEARCH_PATHS = $(SRCROOT) $(SRCROOT)/private $(SRCROOT)/os $(SRCROOT)/src/resolver
+SYSTEM_FRAMEWORK_HEADERS = $(SDKROOT)/System/Library/Frameworks/System.framework/PrivateHeaders
+HEADER_SEARCH_PATHS = $($(PRODUCT_NAME)_SEARCH_PATHS) $(SRCROOT_SEARCH_PATHS) $(SYSTEM_FRAMEWORK_HEADERS) $(SDKROOT)/usr/local/include $(inherited)
+INSTALLHDRS_SCRIPT_PHASE = YES
+ALWAYS_SEARCH_USER_PATHS = YES
+USE_HEADERMAP = NO
+
+GCC_OPTIMIZATION_LEVEL = s
+GCC_C_LANGUAGE_STANDARD = gnu11
+GCC_ENABLE_OBJC_EXCEPTIONS = NO
+GCC_NO_COMMON_BLOCKS = YES
+GCC_SYMBOLS_PRIVATE_EXTERN = NO
+CLANG_LINK_OBJC_RUNTIME = NO
+
+GCC_WARN_64_TO_32_BIT_CONVERSION = YES
+GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES
+GCC_WARN_ABOUT_MISSING_NEWLINE = YES
+//GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES
+GCC_WARN_ABOUT_RETURN_TYPE = YES
+GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES
+GCC_WARN_SIGN_COMPARE = YES
+GCC_WARN_SHADOW = YES
+GCC_WARN_UNKNOWN_PRAGMAS = YES
+GCC_WARN_UNUSED_FUNCTION = YES
+GCC_WARN_UNUSED_LABEL = YES
+// GCC_WARN_UNUSED_PARAMETER = YES
+GCC_WARN_UNUSED_VALUE = YES
+GCC_WARN_UNUSED_VARIABLE = YES
+GCC_WARN_UNINITIALIZED_AUTOS = YES
+CLANG_WARN_ASSIGN_ENUM = YES
+CLANG_WARN_BOOL_CONVERSION = YES
+CLANG_WARN_CONSTANT_CONVERSION = YES
+CLANG_WARN_DOCUMENTATION_COMMENTS = YES
+CLANG_WARN_EMPTY_BODY = YES
+CLANG_WARN_ENUM_CONVERSION = YES
+//CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES
+CLANG_WARN_INFINITE_RECURSION = YES
+// CLANG_WARN_INT_CONVERSION = YES
+CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES
+CLANG_WARN_SUSPICIOUS_MOVE = YES
+CLANG_WARN_UNREACHABLE_CODE = YES
+CLANG_WARN__DUPLICATE_METHOD_MATCH = YES
+
+DISABLED_WARNING_CFLAGS = -Wno-int-conversion -Wno-missing-prototypes -Wno-sign-compare -Wno-sign-conversion -Wno-unused-parameter
+WARNING_CFLAGS = -Wall -Wextra -Warray-bounds-pointer-arithmetic -Wcomma -Wconditional-uninitialized -Wcovered-switch-default -Wdate-time -Wdeprecated -Wdouble-promotion -Wduplicate-enum -Wfloat-equal -Widiomatic-parentheses -Wignored-qualifiers -Wimplicit-fallthrough -Wmissing-noreturn -Wnullable-to-nonnull-conversion -Wover-aligned -Wpointer-arith -Wstatic-in-inline -Wtautological-compare -Wunguarded-availability -Wunused $(NO_WARNING_CFLAGS) $(DISABLED_WARNING_CFLAGS)
+NO_WARNING_CFLAGS = -Wno-pedantic -Wno-bad-function-cast -Wno-c++98-compat-pedantic -Wno-cast-align -Wno-cast-qual -Wno-disabled-macro-expansion -Wno-documentation-unknown-command -Wno-format-nonliteral -Wno-missing-variable-declarations -Wno-packed -Wno-padded -Wno-reserved-id-macro -Wno-switch-enum -Wno-undef -Wno-unreachable-code-aggressive -Wno-unused-macros -Wno-used-but-marked-unused
+
+BASE_PREPROCESSOR_MACROS = __LIBC__ __DARWIN_UNIX03=1 __DARWIN_64_BIT_INO_T=1 __DARWIN_NON_CANCELABLE=1 __DARWIN_VERS_1050=1 _FORTIFY_SOURCE=0 __PTHREAD_BUILDING_PTHREAD__=1 $(SIM_PREPROCESSOR_MACROS) __PTHREAD_EXPOSE_INTERNALS__
+GCC_PREPROCESSOR_DEFINITIONS = $(BASE_PREPROCESSOR_MACROS) $(PLATFORM_PREPROCESSOR_DEFINITIONS)
+
+// TODO: Remove -fstack-protector on _debug when it is moved to libplatform
+OTHER_CFLAGS = -fno-stack-protector -fno-builtin $(PLATFORM_CFLAGS) $($(PRODUCT_NAME)_CFLAGS)
+OTHER_CFLAGS_normal = -momit-leaf-frame-pointer
+OTHER_CFLAGS_debug = -fno-inline -O0 -DDEBUG=1
+
+LINK_WITH_STANDARD_LIBRARIES = NO
+DYLIB_CURRENT_VERSION = $(RC_ProjectSourceVersion)
+DYLIB_COMPATIBILITY_VERSION = 1
+DIRTY_LDFLAGS = -Wl,-dirty_data_list,$(SRCROOT)/xcodescripts/pthread.dirty
+DIRTY_LDFLAGS[sdk=macos*] =
+DYLIB_LDFLAGS = -Wl,-alias_list,$(SRCROOT)/xcodescripts/pthread.aliases -Wl,-umbrella,System -L/usr/lib/system -lsystem_kernel -lsystem_platform -ldyld -lcompiler_rt
+OTHER_LDFLAGS = $(DYLIB_LDFLAGS) $(DIRTY_LDFLAGS) $(CR_LDFLAGS) $(PLATFORM_LDFLAGS)
+
+// Simulator build rules
+EXCLUDED_SOURCE_FILE_NAMES[sdk=iphonesimulator*] = *.c *.s
+SKIP_INSTALL[sdk=iphonesimulator*] = YES
+OTHER_LDFLAGS[sdk=iphonesimulator*] =
+

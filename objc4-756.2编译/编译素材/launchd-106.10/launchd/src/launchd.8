@@ -1,0 +1,77 @@
+.Dd September 30, 2004
+.Dt launchd 8 
+.Os Darwin
+.Sh NAME
+.Nm launchd
+.Nd System wide and per-user daemon/agent manager
+.Sh SYNOPSIS
+.Nm
+.Op Fl d
+.Op Fl v
+.Op Fl s
+.Op Fl x
+.Op Ar -- command Op Ar args ...
+.Sh DESCRIPTION
+.Nm 
+manages daemons, both for the system as a whole and for individual users. Ideal daemons can launch
+on demand based on criteria specified in their respective XML property lists located in one of the
+directories specified in the FILES section.
+.Pp
+When run with a command, a specific instance of
+.Nm
+is created and the command is implicitly added to the list of jobs maintained by
+.Nm .
+If the command exits, that instance of
+.Nm
+will clean up all jobs maintained by itself and exit. All children of the command will use that
+instance of
+.Nm .
+.Pp
+During boot 
+.Nm
+is invoked by the kernel to run as the first process on the system and to further bootstrap the rest of the system.
+.Sh OPTIONS WHEN RUN AS PID 1
+.Bl -tag -width -indent
+.It Fl d
+Daemonize. Useful when passing a command to launchd on the command line.
+.It Fl v
+Verbose boot.
+.It Fl s
+Single user mode. Instructs
+.Nm launchd
+to give a shell prompt before booting the system.
+.It Fl x
+Safe mode boot. Instructs the system to boot conservatively.
+.El
+.Sh ENVIRONMENTAL VARIABLES
+.Bl -tag -width -indent
+.It Pa LAUNCHD_SOCKET
+This variable is exported when invoking a command via the launchd command line. It informs launchctl how to find the correct launchd to talk to.
+.El
+.Sh NOTES
+In Darwin it is preferable to have your daemon launch via launchd instead of modifying
+.Nm rc
+or creating a
+.Nm SystemStarter
+Startup Item.
+.Pp
+At some point in the future, we hope to completely phase out the use of
+.Nm rc .
+.Sh FILES
+.Bl -tag -width "/System/Library/LaunchDaemons" -compact
+.It Pa ~/Library/LaunchAgents
+Per-user agents provided by the user.
+.It Pa /Library/LaunchAgents
+Per-user agents provided by the administrator.
+.It Pa /Library/LaunchDaemons
+System wide daemons provided by the administrator.
+.It Pa /System/Library/LaunchAgents
+Mac OS X Per-user agents.
+.It Pa /System/Library/LaunchDaemons
+Mac OS X System wide daemons.
+.El
+.Sh SEE ALSO 
+.Xr launchctl 1 ,
+.Xr launchd.plist 5 ,
+.Xr rc 8 ,
+.Xr SystemStarter 8

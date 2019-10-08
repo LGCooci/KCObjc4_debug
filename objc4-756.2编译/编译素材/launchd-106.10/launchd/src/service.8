@@ -1,0 +1,29 @@
+.Dd October 15, 2004
+.Dt SERVICE 8
+.Os Darwin
+.Sh NAME
+.Nm service
+.Sh SYNOPSIS
+.Nm
+.Ar service Ar command
+.Nm
+.Fl -list
+.Nm
+.Fl -test-if-configured-on Ar service
+.Nm
+.Fl -test-if-available Ar service
+.Sh DESCRIPTION
+.Nm
+is a simple script to abstract the management of services provided by the system.
+It can be used to start and stop services, as well as to determine the status of services.
+.Sh OPTIONS
+.Bl -tag -width indent
+.It Ar service Ar command
+Attempt to execute a given command for a given service. Currently, the available commands are 'start' and 'stop'.
+.It Fl -list
+List all available services.
+.It Fl -test-if-configured-on Ar service
+Exit with status 0 if the service is currently enabled. Otherwise, exit with status 1.
+.It Fl -test-if-available Ar service
+Exit with status 0 if the service's daemon exists on your system. Otherwise, exit with status 1.
+.El

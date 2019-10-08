@@ -1,0 +1,4 @@
+{
+  Description     = "authentication service";
+  Provides        = ("TIM");
+}

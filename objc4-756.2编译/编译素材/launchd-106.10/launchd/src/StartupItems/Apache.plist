@@ -1,0 +1,5 @@
+{
+  Description     = "Apache web server";
+  Provides        = ("Web Server");
+  Uses            = ("Disks", "NFS");
+}

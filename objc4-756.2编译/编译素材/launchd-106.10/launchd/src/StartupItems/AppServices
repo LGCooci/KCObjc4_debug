@@ -1,0 +1,27 @@
+#!/bin/sh
+
+##
+# Application Services
+##
+
+. /etc/rc.common
+
+StartService ()
+{
+    # Launch Services
+    if [ -x /System/Library/Frameworks/ApplicationServices.framework/Frameworks/LaunchServices.framework/Versions/Current/Support/lsregister ]; then
+        /System/Library/Frameworks/ApplicationServices.framework/Frameworks/LaunchServices.framework/Versions/Current/Support/lsregister -load
+    fi
+}
+
+StopService ()
+{
+    return 0
+}
+
+RestartService ()
+{
+    return 0
+}
+
+RunService "$1"

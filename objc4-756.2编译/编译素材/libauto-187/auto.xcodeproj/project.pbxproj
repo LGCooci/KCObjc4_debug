@@ -1,0 +1,235 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CFC31873066F477A004CA32A /* auto_zone.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A69FBAD028E2DA801004A08 /* auto_zone.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CFC31875066F477A004CA32A /* auto_zone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A69FBAC028E2DA801004A08 /* auto_zone.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0A69FBAC028E2DA801004A08 /* auto_zone.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = auto_zone.cpp; sourceTree = "<group>"; };
+		0A69FBAD028E2DA801004A08 /* auto_zone.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = auto_zone.h; sourceTree = "<group>"; };
+		CF201BE706958ADD007E1DAD /* System.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = System.framework; path = /System/Library/Frameworks/System.framework; sourceTree = "<absolute>"; };
+		CFC3188B066F477A004CA32A /* libauto.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libauto.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1EA00460332A2FE05000103 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		F1F3104C039BF34B05C918AB /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CFC31888066F477A004CA32A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* auto */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7795FE84155DC02AAC07 /* Source */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = auto;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				0A69FBAC028E2DA801004A08 /* auto_zone.cpp */,
+				0A69FBAD028E2DA801004A08 /* auto_zone.h */,
+				F1EA00460332A2FE05000103 /* Foundation.framework */,
+				F1F3104C039BF34B05C918AB /* CoreFoundation.framework */,
+				CF201BE706958ADD007E1DAD /* System.framework */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CFC3188B066F477A004CA32A /* libauto.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		CFC3184B066F477A004CA32A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFC31873066F477A004CA32A /* auto_zone.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		CFC3184A066F477A004CA32A /* autodylib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 39B51FF60957B18600E999B7 /* Build configuration list for PBXNativeTarget "autodylib" */;
+			buildPhases = (
+				CFC3184B066F477A004CA32A /* Headers */,
+				CFC31874066F477A004CA32A /* Sources */,
+				CFC31888066F477A004CA32A /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = autodylib;
+			productInstallPath = /usr/lib;
+			productName = autodylib;
+			productReference = CFC3188B066F477A004CA32A /* libauto.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = 39B520060957B18600E999B7 /* Build configuration list for PBXProject "auto" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 08FB7794FE84155DC02AAC07 /* auto */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CFC3184A066F477A004CA32A /* autodylib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CFC31874066F477A004CA32A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFC31875066F477A004CA32A /* auto_zone.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		39B51FF70957B18600E999B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					AUTO_TESTER,
+					"DEBUG=1",
+				);
+				GCC_STRICT_ALIASING = YES;
+				GCC_UNROLL_LOOPS = YES;
+				INSTALL_PATH = /usr/lib;
+				OTHER_LDFLAGS = (
+					"-bind_at_load",
+					"$(OTHER_LDFLAGS)",
+				);
+				"OTHER_LDFLAGS[sdk=macosx*][arch=*]" = (
+					"-lc++",
+					"$(OTHER_LDFLAGS)",
+				);
+				PRODUCT_NAME = libauto;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		39B51FF80957B18600E999B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
+				GCC_STRICT_ALIASING = YES;
+				GCC_UNROLL_LOOPS = YES;
+				INSTALL_PATH = /usr/lib;
+				OTHER_LDFLAGS = (
+					"-bind_at_load",
+					"$(OTHER_LDFLAGS)",
+				);
+				"OTHER_LDFLAGS[sdk=macosx*][arch=*]" = (
+					"-lc++",
+					"$(OTHER_LDFLAGS)",
+				);
+				PRODUCT_NAME = libauto;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		39B520070957B18600E999B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
+				COPY_PHASE_STRIP = NO;
+				DTRACE_OTHER_FLAGS = "-I ./ -C";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				STRIP_INSTALLED_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		39B520080957B18600E999B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
+				COPY_PHASE_STRIP = NO;
+				DTRACE_OTHER_FLAGS = "-I ./ -C";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		39B51FF60957B18600E999B7 /* Build configuration list for PBXNativeTarget "autodylib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39B51FF70957B18600E999B7 /* Debug */,
+				39B51FF80957B18600E999B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		39B520060957B18600E999B7 /* Build configuration list for PBXProject "auto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39B520070957B18600E999B7 /* Debug */,
+				39B520080957B18600E999B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

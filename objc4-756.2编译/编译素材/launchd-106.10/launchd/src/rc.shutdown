@@ -1,0 +1,14 @@
+#!/bin/sh
+# Copyright 1997-2004 Apple Computer, Inc.
+
+. /etc/rc.common
+
+if [ -f /etc/rc.shutdown.local ]; then
+	sh /etc/rc.shutdown.local
+fi
+
+SystemStarter stop
+
+kill -TERM 1
+
+exit 0

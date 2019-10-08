@@ -1,0 +1,52 @@
+#!/bin/sh
+
+##
+# Apache HTTP Server
+##
+
+. /etc/rc.common
+
+StartService ()
+{
+    if [ "${WEBSERVER:=-NO-}" = "-YES-" ]; then
+        echo "Starting Apache web server"
+        if [ ! -e /etc/httpd/httpd.conf ] ; then
+                cp -p /etc/httpd/httpd.conf.default /etc/httpd/httpd.conf
+        fi
+        apachectl start
+        if [ "${WEBPERFCACHESERVER:=-NO-}" = "-YES-" ]; then
+            if [ -x /usr/sbin/webperfcachectl ]; then
+                echo "Starting web performance cache server"
+                /usr/sbin/webperfcachectl start
+            fi
+        fi
+    fi
+}
+
+StopService ()
+{
+    if [ -x /usr/sbin/webperfcachectl ]; then
+        echo "Stopping web performance cache server"
+        /usr/sbin/webperfcachectl stop
+    fi
+    echo "Stopping Apache web server"
+    apachectl stop 
+}
+
+RestartService ()
+{
+    if [ "${WEBSERVER:=-NO-}" = "-YES-" ]; then
+        echo "Restarting Apache web server"
+        apachectl restart
+        if [ "${WEBPERFCACHESERVER:=-NO-}" = "-YES-" ]; then
+            if [ -x /usr/sbin/webperfcachectl ]; then
+                echo "Restarting web performance cache server"
+                /usr/sbin/webperfcachectl restart
+            fi
+        fi
+    else
+        StopService
+    fi
+}
+
+RunService "$1"

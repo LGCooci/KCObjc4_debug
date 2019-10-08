@@ -1,0 +1,270 @@
+<html>
+<body>
+<h1>Getting Started With Launchd</h1>
+
+<p>Launchd is rather simple actually. Far simpler than you might think.</p>
+
+<h2>Before We Get Started</h2>
+
+<p>Launchd, in an effort to be consistent with other Apple software, uses the
+Property List file format for storing configuration information. Apple's
+Property List APIs provide for three different file formats for storing a
+property list to disk. A plain text option, a binary option, and an XML text
+option. For the remainder of this HOWTO, we will use the XML varient to show
+what a configuration file looks like.</p>
+
+<h3>The basics:</h3>
+
+<p>For the simplest of scenarios, launchd just keeps a process alive. A simple "hello
+world" example of that would be:</p>
+
+<blockquote><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+        &lt;key&gt;Label&lt;/key&gt;
+        &lt;string&gt;com.example.sleep&lt;/string&gt;
+        &lt;key&gt;ProgramArguments&lt;/key&gt;
+        &lt;array&gt;
+                &lt;string&gt;sleep&lt;/string&gt;
+                &lt;string&gt;100&lt;/string&gt;
+        &lt;/array&gt;
+        &lt;key&gt;OnDemand&lt;/key&gt;
+        &lt;false/&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</pre></blockquote>
+
+<p>In the above example, we have three keys to our top level dictionary. The first
+is the <code>Label</code> which is what is used to uniquely identify jobs when interacting
+with launchd. The second is <code>ProgramArguments</code> which for its value, we have an
+array of strings which represent the tokenized arguments and the program to
+run. The third and final key is <code>OnDemand</code> which overrides the default value of
+true with false thereby instructing launchd to always try and keep this job
+running. That's it! A <code>Label</code>, some <code>ProgramArguments</code> and <code>OnDemand</code> set to false is all
+you need to keep a daemon alive with launchd!</p>
+
+<p>Now if you've ever written a daemon before, you've either called the
+<code>daemon()</code> function or written one yourself. With launchd, that is
+not only unnecessary, but unsupported. If you try and run a daemon you didn't
+write under launchd, you must, at the very least, find a configuration option to
+keep the daemon from daemonizing itself so that launchd can monitor it.</p>
+
+<h3>Going beyond the basics with optional keys:</h3>
+
+<p>There are many optional keys available and documented in the launchd.plist
+man page, so we'll only give a few optional, but common examples:</p>
+
+<blockquote><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+        &lt;key&gt;Label&lt;/key&gt;
+        &lt;string&gt;com.example.sleep&lt;/string&gt;
+        &lt;key&gt;ProgramArguments&lt;/key&gt;
+        &lt;array&gt;
+                &lt;string&gt;sleep&lt;/string&gt;
+                &lt;string&gt;100&lt;/string&gt;
+        &lt;/array&gt;
+        &lt;key&gt;OnDemand&lt;/key&gt;
+        &lt;false/&gt;
+        &lt;key&gt;UserName&lt;/key&gt;
+        &lt;string&gt;daemon&lt;/string&gt;
+        &lt;key&gt;GroupName&lt;/key&gt;
+        &lt;string&gt;daemon&lt;/string&gt;
+        &lt;key&gt;EnvironmentVariables&lt;/key&gt;
+	&lt;dict&gt;
+		&lt;key&gt;FOO&lt;/key&gt;
+		&lt;string&gt;bar&lt;/string&gt;
+	&lt;/dict&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</pre></blockquote>
+
+<p>In the above example, we see that the job is run as a certain user and group, and additionally has an extra environment variable set.</p>
+
+<h3>Debugging tricks:</h3>
+
+<p>The following example will enable core dumps, set standard out and error to
+go to a log file and to instruct launchd to temporarily bump up the debug level
+of launchd's loggging while acting on behave of your job (remember to adjust
+your syslog.conf accordingly):</p>
+
+<blockquote><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+        &lt;key&gt;Label&lt;/key&gt;
+        &lt;string&gt;com.example.sleep&lt;/string&gt;
+        &lt;key&gt;ProgramArguments&lt;/key&gt;
+        &lt;array&gt;
+                &lt;string&gt;sleep&lt;/string&gt;
+                &lt;string&gt;100&lt;/string&gt;
+        &lt;/array&gt;
+        &lt;key&gt;OnDemand&lt;/key&gt;
+        &lt;false/&gt;
+        &lt;key&gt;StandardOutPath&lt;/key&gt;
+        &lt;string&gt;/var/log/myjob.log&lt;/string&gt;
+        &lt;key&gt;StandardErrorPath&lt;/key&gt;
+        &lt;string&gt;/var/log/myjob.log&lt;/string&gt;
+        &lt;key&gt;Debug&lt;/key&gt;
+        &lt;true/&gt;
+        &lt;key&gt;SoftResourceLimits&lt;/key&gt;
+	&lt;dict&gt;
+	        &lt;key&gt;Core&lt;/key&gt;
+		&lt;integer&gt;9223372036854775807&lt;/integer&gt;
+	&lt;/dict&gt;
+        &lt;key&gt;HardResourceLimits&lt;/key&gt;
+	&lt;dict&gt;
+	        &lt;key&gt;Core&lt;/key&gt;
+		&lt;integer&gt;9223372036854775807&lt;/integer&gt;
+	&lt;/dict&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</pre></blockquote>
+
+<h2>But what if I don't want or expect my job to run continuously?</h2>
+
+<h3>The basics of on demand launching:</h3>
+
+<p>Launchd provides a multitude of different criteria that can be used to specify
+when a job should be started. It is important to note that launchd will only
+run one instance of your job though. Therefore, if your on demand job
+malfunctions, you are guaranteed that launchd will not spawn additional copies
+when your criteria is satisfied once more in the future.</p>
+
+<h3>Starting a job periodically:</h3>
+
+<p>Here is an example on how to have a job start every five minutes (300 seconds):</p>
+
+<blockquote><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+        &lt;key&gt;Label&lt;/key&gt;
+        &lt;string&gt;com.example.touchsomefile&lt;/string&gt;
+        &lt;key&gt;ProgramArguments&lt;/key&gt;
+        &lt;array&gt;
+                &lt;string&gt;touch&lt;/string&gt;
+		&lt;string&gt;/tmp/helloworld&lt;/string&gt;
+        &lt;/array&gt;
+        &lt;key&gt;StartInterval&lt;/key&gt;
+	&lt;integer&gt;300&lt;/integer&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</pre></blockquote>
+
+<p>Sometimes you want a job started on a calendar based interval. The following example will start the job on the 11th minute of the 11th hour every day (using a 24 hour clock system) on the 11th day of the month. Like the Unix cron subsystem, any missing key of the <code>StartCalendarInterval</code> dictionary is treated as a wildcard:</p>
+
+<blockquote><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+        &lt;key&gt;Label&lt;/key&gt;
+        &lt;string&gt;com.example.touchsomefile&lt;/string&gt;
+        &lt;key&gt;ProgramArguments&lt;/key&gt;
+        &lt;array&gt;
+                &lt;string&gt;touch&lt;/string&gt;
+		&lt;string&gt;/tmp/helloworld&lt;/string&gt;
+        &lt;/array&gt;
+        &lt;key&gt;StartCalendarInterval&lt;/key&gt;
+        &lt;dict&gt;
+        	&lt;key&gt;Minute&lt;/key&gt;
+		&lt;integer&gt;11&lt;/integer&gt;
+		&lt;key&gt;Hour&lt;/key&gt;
+		&lt;integer&gt;11&lt;/integer&gt;
+		&lt;key&gt;Day&lt;/key&gt;
+		&lt;integer&gt;11&lt;/integer&gt;
+        &lt;/dict&gt;
+&lt;/dict&gt;
+</pre></blockquote>
+
+<h3>Starting a job based on file system activity:</h3>
+
+<p>The following example will start the job whenever any of the paths being watched change for whatever reason:</p>
+
+<blockquote><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+        &lt;key&gt;Label&lt;/key&gt;
+	&lt;string&gt;com.example.watchetchostconfig&lt;/string&gt;
+        &lt;key&gt;ProgramArguments&lt;/key&gt;
+        &lt;array&gt;
+                &lt;string&gt;syslog&lt;/string&gt;
+                &lt;string&gt;-s&lt;/string&gt;
+                &lt;string&gt;-l&lt;/string&gt;
+                &lt;string&gt;notice&lt;/string&gt;
+		&lt;string&gt;somebody touched /etc/hostconfig&lt;/string&gt;
+        &lt;/array&gt;
+	&lt;key&gt;WatchPaths&lt;/key&gt;
+        &lt;array&gt;
+        	&lt;string&gt;/etc/hostconfig&lt;/string&gt;
+        &lt;/array&gt;
+&lt;/dict&gt;
+</pre></blockquote>
+
+<p>An additional file system trigger is the notion of a queue directory. Launchd will star your job whenever
+the given directories are non-empty and will keep your job running as long as those directories are not empty:</p>
+
+<blockquote><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+        &lt;key&gt;Label&lt;/key&gt;
+	&lt;string&gt;com.example.mailpush&lt;/string&gt;
+        &lt;key&gt;ProgramArguments&lt;/key&gt;
+        &lt;array&gt;
+		&lt;string&gt;my_custom_mail_push_tool&lt;/string&gt;
+        &lt;/array&gt;
+	&lt;key&gt;QueueDirectories&lt;/key&gt;
+        &lt;array&gt;
+        	&lt;string&gt;/var/spool/mymailqdir&lt;/string&gt;
+        &lt;/array&gt;
+&lt;/dict&gt;
+</pre></blockquote>
+
+<h3>Inetd Emulation</h3>
+
+<p>Launchd will happily emulate inetd style daemon semantics:</p>
+
+<blockquote><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+        &lt;key&gt;Label&lt;/key&gt;
+	&lt;string&gt;com.example.telnetd&lt;/string&gt;
+        &lt;key&gt;ProgramArguments&lt;/key&gt;
+        &lt;array&gt;
+		&lt;string&gt;/usr/libexec/telnetd&lt;/string&gt;
+        &lt;/array&gt;
+	&lt;key&gt;inetdCompatibility&lt;/key&gt;
+        &lt;dict&gt;
+        	&lt;key&gt;Wait&lt;/key&gt;
+        	&lt;false/&gt;
+        &lt;/dict&gt;
+        &lt;key&gt;Sockets&lt;/key&gt;
+        &lt;dict&gt;
+        	&lt;key&gt;Listeners&lt;/key&gt;
+        	&lt;dict&gt;
+        		&lt;key&gt;SockServiceName&lt;/key&gt;
+        		&lt;string&gt;telnet&lt;/string&gt;
+        		&lt;key&gt;SockType&lt;/key&gt;
+        		&lt;string&gt;stream&lt;/string&gt;
+        	&lt;/dict&gt;
+        &lt;/dict&gt;
+&lt;/dict&gt;
+</pre></blockquote>
+
+<h1>TBD</h1>
+
+</body>
+</html>

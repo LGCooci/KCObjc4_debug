@@ -1,0 +1,31 @@
+#!/bin/sh
+
+##
+# Authentication Server
+##
+
+. /etc/rc.common
+
+StartService ()
+{
+    if [ "${AUTHSERVER:=-NO-}" = "-YES-" ]; then
+	echo "Starting Authentication Server"
+	tim
+    fi
+}
+
+StopService ()
+{
+    if [ "${AUTHSERVER:=-NO-}" = "-YES-" ]; then
+        echo "Stopping Authentication Server"
+    fi
+    killall -TERM tim > /dev/null 2>&1
+}
+
+RestartService ()
+{
+    StopService
+    StartService
+}
+
+RunService "$1"

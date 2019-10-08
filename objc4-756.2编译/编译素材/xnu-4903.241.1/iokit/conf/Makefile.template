@@ -1,0 +1,111 @@
+#
+# Mach Operating System
+# Copyright (c) 1986 Carnegie-Mellon University
+# All rights reserved.  The CMU software License Agreement specifies
+# the terms and conditions for use and redistribution.
+#
+
+export MakeInc_cmd=${SRCROOT}/makedefs/MakeInc.cmd
+export MakeInc_def=${SRCROOT}/makedefs/MakeInc.def
+export MakeInc_rule=${SRCROOT}/makedefs/MakeInc.rule
+export MakeInc_dir=${SRCROOT}/makedefs/MakeInc.dir
+
+include $(MakeInc_cmd)
+include $(MakeInc_def)
+
+#
+# XXX: CFLAGS
+#
+CFLAGS+= -include meta_features.h -DDRIVER_PRIVATE		\
+	-DIOKIT_KERNEL_PRIVATE -DIOMATCHDEBUG=1 -DIOALLOCDEBUG=1
+SFLAGS+= -include meta_features.h
+#-DIOKITDEBUG=-1
+
+CWARNFLAGS   = $(CWARNFLAGS_STD) -Wno-unused-parameter
+CXXWARNFLAGS = $(CXXWARNFLAGS_STD) -Wno-unused-parameter -Wno-cast-qual -Wno-shadow
+
+# Objects that don't want -Wcast-align warning (8474835)
+IOHibernateRestoreKernel.o_CWARNFLAGS_ADD = -Wno-cast-align
+CXXOBJS_NO_CAST_ALIGN =				\
+		IODMACommand.cpo		\
+		IODataQueue.cpo			\
+		IOHibernateIO.cpo		\
+		IOMemoryDescriptor.cpo		\
+		IONVRAM.cpo			\
+		IOPMrootDomain.cpo		\
+		IOSharedDataQueue.cpo		\
+		IOUserClient.cpo
+
+$(foreach file,$(CXXOBJS_NO_CAST_ALIGN),$(eval $(call add_perfile_cxxflags,$(file),-Wno-cast-align)))
+
+CFLAGS_RELEASE += -DIOASSERT=0
+CFLAGS_DEVELOPMENT += -DIOASSERT=1
+CFLAGS_DEBUG += -DIOASSERT=1
+
+IOUserClient.cpo_CXXWARNFLAGS_ADD += -Wno-missing-prototypes
+IOKitDebug.cpo_CXXWARNFLAGS_ADD += -Wno-missing-prototypes
+IOKitBSDInit.cpo_CXXWARNFLAGS_ADD += -Wno-missing-prototypes -Wno-documentation
+IOPMrootDomain.cpo_CXXWARNFLAGS_ADD += -Wno-missing-prototypes
+
+#
+# Directories for mig generated files
+#
+COMP_SUBDIRS =
+
+#
+#  Make sure we don't remove this by accident if interrupted at the wrong
+#  time.
+#
+.PRECIOUS: Makefile
+
+#
+#  Theses macros are filled in by the config program depending on the
+#  current configuration.  The MACHDEP macro is replaced by the
+#  contents of the machine dependent makefile template and the others
+#  are replaced by the corresponding symbol definitions for the
+#  configuration.
+#
+
+%OBJS
+
+%CFILES
+
+%CXXFILES
+
+%SFILES
+
+%MACHDEP
+
+# Rebuild if per-file overrides change
+${OBJS}: $(firstword $(MAKEFILE_LIST))
+
+# Rebuild if global compile flags change
+$(COBJS): .CFLAGS
+.CFLAGS: ALWAYS
+	$(_v)$(REPLACECONTENTS) $@ $(KCC) $(CFLAGS) $(INCFLAGS)
+$(CXXOBJS): .CXXFLAGS
+.CXXFLAGS: ALWAYS
+	$(_v)$(REPLACECONTENTS) $@ $(KC++) $(CXXFLAGS) $(INCFLAGS)
+$(SOBJS): .SFLAGS
+.SFLAGS: ALWAYS
+	$(_v)$(REPLACECONTENTS) $@ $(S_KCC) $(SFLAGS) $(INCFLAGS)
+
+$(COMPONENT).filelist: $(OBJS)
+	$(_v)for hib_file in ${HIB_FILES};		\
+	do	\
+                $(SEG_HACK) -n __HIB -o $${hib_file}__ $${hib_file} || exit 1; \
+                mv $${hib_file}__ $${hib_file} || exit 1; \
+	done
+	@echo "$(ColorL)LDFILELIST$(Color0) $(ColorLF)$(COMPONENT)$(Color0)"
+	$(_v)for obj in ${OBJS}; do	\
+		 echo $(TARGET)/$(CURRENT_KERNEL_CONFIG)/$${obj}; \
+	done > $(COMPONENT).filelist
+
+do_all: $(COMPONENT).filelist
+
+do_build_all:: do_all
+
+%RULES
+
+include $(MakeInc_rule)
+include $(MakeInc_dir)

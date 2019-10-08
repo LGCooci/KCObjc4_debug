@@ -1,0 +1,21 @@
+.Dd February 2, 2005
+.Dt launchd_debugd 8 
+.Os Darwin
+.Sh NAME
+.Nm launchd_debugd
+.Nd Simple HTTP server to display job data
+.Sh SYNOPSIS
+.Nm
+.Sh DESCRIPTION
+.Nm 
+Provides a simple HTTP server to display all jobs loaded into
+.Nm launchd .
+This program may be merged into
+.Nm launchd
+in the future.
+.Pp
+To enable (as root): "launchctl load -w /System/Library/LaunchDaemons/com.apple.launchd_helperd.plist"
+.Sh SEE ALSO 
+.Xr launchctl 1 ,
+.Xr launchd.plist 5 ,
+.Xr launchd 8

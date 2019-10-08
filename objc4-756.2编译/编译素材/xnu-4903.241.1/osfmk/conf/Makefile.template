@@ -1,0 +1,176 @@
+#
+# Mach Operating System
+# Copyright (c) 1986 Carnegie-Mellon University
+# All rights reserved.  The CMU software License Agreement specifies
+# the terms and conditions for use and redistribution.
+#
+
+export MakeInc_cmd=${SRCROOT}/makedefs/MakeInc.cmd
+export MakeInc_def=${SRCROOT}/makedefs/MakeInc.def
+export MakeInc_rule=${SRCROOT}/makedefs/MakeInc.rule
+export MakeInc_dir=${SRCROOT}/makedefs/MakeInc.dir
+
+include $(MakeInc_cmd)
+include $(MakeInc_def)
+
+#
+# XXX: CFLAGS
+#
+CFLAGS+= -include meta_features.h -DMACH_KERNEL_PRIVATE -DMACH_KERNEL
+SFLAGS+= -include meta_features.h
+
+# Objects that don't want -Wcast-align warning (8474835)
+OBJS_NO_CAST_ALIGN =			\
+		atm_notification_user.o \
+		model_dep.o		\
+		video_console.o		\
+		kdp_udp.o		\
+		kdp_machdep.o		\
+		host.o			\
+		processor.o		\
+		sched_prim.o		\
+		task.o			\
+		thread.o		\
+		threadinfo.o		\
+		gssd_mach.o		\
+		UNDRequest.o		\
+		panic_dialog.o		\
+		bsd_i386.o		\
+		commpage.o		\
+		cpu_threads.o		\
+		cpuid.o			\
+		locks_i386.o		\
+		locks_i386_opt.o	\
+		machine_task.o		\
+		mp_desc.o		\
+		pcb.o			\
+		pcb_native.o		\
+		kdp_x86_common.o	\
+		startup64.o		\
+		affinity.o		\
+		sched_grrr.o		\
+		sched_proto.o		\
+		stack.o			\
+		task_policy.o		\
+		wait_queue.o		\
+		bsd_kern.o		\
+		pmc.o			\
+		status.o		\
+		machine_routines.o	\
+		loose_ends.o		\
+		sleh.o			\
+		ccdigest_final_64be.o	\
+		ccdigest_init.o		\
+		ccdigest_update.o	\
+		cchmac_final.o		\
+		cchmac_init.o		\
+		ccsha1.o		\
+		ipc_object.o		\
+		ipc_kmsg.o		\
+		ipc_right.o
+
+# Objects that don't want -Wsign-compare warning (15294427)
+OBJS_NO_SIGN_COMPARE =		\
+		atm_notification_user.o
+
+$(foreach file,$(OBJS_NO_CAST_ALIGN),$(eval $(call add_perfile_cflags,$(file),-Wno-cast-align)))
+$(foreach file,$(OBJS_NO_SIGN_COMPARE),$(eval $(call add_perfile_cflags,$(file),-Wno-sign-compare)))
+
+#
+# XXX: INCFLAGS to include libsa prototypes
+#
+INCFLAGS_MAKEFILE= -I$(SOURCE)libsa
+
+#
+# Directories for mig generated files
+#
+COMP_SUBDIRS = \
+	atm \
+	default_pager \
+	device \
+	mach \
+	UserNotification \
+	gssd \
+	kextd \
+	lockd
+
+#
+#  Make sure we don't remove this by accident if interrupted at the wrong
+#  time.
+#
+.PRECIOUS: Makefile
+
+#
+#  Theses macros are filled in by the config program depending on the
+#  current configuration.  The MACHDEP macro is replaced by the
+#  contents of the machine dependent makefile template and the others
+#  are replaced by the corresponding symbol definitions for the
+#  configuration.
+#
+
+%OBJS
+
+%CFILES
+
+%CXXFILES
+
+%SFILES
+
+%MACHDEP
+
+# Rebuild if per-file overrides change
+${OBJS}: $(firstword $(MAKEFILE_LIST))
+
+# Rebuild if global compile flags change
+$(COBJS): .CFLAGS
+.CFLAGS: ALWAYS
+	$(_v)$(REPLACECONTENTS) $@ $(KCC) $(CFLAGS) $(INCFLAGS)
+$(CXXOBJS): .CXXFLAGS
+.CXXFLAGS: ALWAYS
+	$(_v)$(REPLACECONTENTS) $@ $(KC++) $(CXXFLAGS) $(INCFLAGS)
+$(SOBJS): .SFLAGS
+.SFLAGS: ALWAYS
+	$(_v)$(REPLACECONTENTS) $@ $(S_KCC) $(SFLAGS) $(INCFLAGS)
+
+$(COMPONENT).filelist: $(OBJS)
+	$(_v)for hib_file in ${HIB_FILES};		\
+	do	\
+                $(SEG_HACK) -n __HIB -o $${hib_file}__ $${hib_file} || exit 1; \
+                mv $${hib_file}__ $${hib_file} || exit 1; \
+	done
+	@echo "$(ColorL)LDFILELIST$(Color0) $(ColorLF)$(COMPONENT)$(Color0)"
+	$(_v)for obj in ${OBJS}; do	\
+		 echo $(TARGET)/$(CURRENT_KERNEL_CONFIG)/$${obj}; \
+	done > $(COMPONENT).filelist
+
+do_all: $(COMPONENT).filelist
+
+do_build_all:: do_all
+
+# genassym.o actually is an assembly file,
+# we name it genassym.o to help with the automatic
+# dependency generation
+
+GENASSYM_LOCATION = $(CURRENT_ARCH_CONFIG_LC)
+
+ifeq ($(CURRENT_ARCH_CONFIG_LC),x86_64)
+GENASSYM_LOCATION = i386
+else ifeq ($(CURRENT_ARCH_CONFIG_LC),x86_64h)
+GENASSYM_LOCATION = i386
+endif
+
+-include genassym.d
+genassym.o: .CFLAGS $(firstword $(MAKEFILE_LIST))
+genassym.o: $(SOURCE_DIR)/$(COMPONENT)/$(GENASSYM_LOCATION)/genassym.c
+	@echo "[$(CMD_MC)] $(ColorH)GENASSYM$(Color0)      $(ColorLF)$<$(Color0)"
+	$(_v)${GENASSYM_KCC} ${CFLAGS} ${CFLAGS_NOLTO_FLAG} -MD -S -o ${@} ${INCFLAGS} $<
+
+assym.s: genassym.o
+	$(_v)sed -e '/^[[:space:]]*DEFINITION__define__/!d;{N;s/\n//;}' -e 's/^[[:space:]]*DEFINITION__define__\([^:]*\):.*ascii.*\"[\$$]*\([-0-9\#]*\)\".*$$/#define \1 \2/' -e 'p'  -e 's/#//2' -e 's/^[[:space:]]*#define \([A-Za-z0-9_]*\)[[:space:]]*[\$$#]*\([-0-9]*\).*$$/#define \1_NUM \2/' genassym.o > $@
+
+${SOBJS}: assym.s
+
+%RULES
+
+include $(MakeInc_rule)
+include $(MakeInc_dir)

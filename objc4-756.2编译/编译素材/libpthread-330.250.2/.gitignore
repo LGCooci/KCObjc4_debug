@@ -1,0 +1,6 @@
+# /
+/build/
+
+# /libpthread.xcodeproj/
+/libpthread.xcodeproj/xcuserdata
+/libpthread.xcodeproj/*.xcworkspace

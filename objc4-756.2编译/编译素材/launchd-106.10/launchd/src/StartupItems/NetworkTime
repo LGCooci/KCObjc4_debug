@@ -1,0 +1,42 @@
+#!/bin/sh
+
+##
+# Network Time
+##
+
+. /etc/rc.common
+
+StartService ()
+{
+    if [ "${TIMESYNC:=-YES-}" = "-YES-" ] &&
+       ! GetPID ntpd > /dev/null; then
+
+	CheckForNetwork
+
+	if [ -f /var/run/NetworkTime.StartupItem -o "${NETWORKUP}" = "-NO-" ]; then exit; fi
+	touch /var/run/NetworkTime.StartupItem
+
+
+	echo "Starting network time synchronization"
+
+	# Synchronize our clock to the network's time,
+	# then fire off ntpd to keep the clock in sync.
+	ntpdate -bvs
+	ntpd -f /var/run/ntp.drift -p /var/run/ntpd.pid
+    fi
+}
+
+StopService ()
+{
+    if pid=$(GetPID ntpd); then
+	echo "Stopping network time synchronization"
+	kill -TERM "${pid}"
+    else
+	echo "ntpd is not running."
+    fi
+    rm -f /var/run/NetworkTime.StartupItem
+}
+
+RestartService () { StopService; StartService; }
+
+RunService "$1"

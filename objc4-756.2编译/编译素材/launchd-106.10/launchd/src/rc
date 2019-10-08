@@ -1,0 +1,304 @@
+#!/bin/sh
+# Copyright 1997-2004 Apple Computer, Inc.
+
+. /etc/rc.common
+
+export -n SafeBoot
+export -n VerboseFlag
+export -n FsckSlash
+export -n NetBoot
+
+if [ -d /System/Installation -a -f /etc/rc.cdrom ]; then
+	/etc/rc.cdrom multiuser
+	# We shouldn't get here; CDIS should reboot the machine when done
+	echo "CD-ROM boot procedure complete"
+	halt
+fi
+
+if [ "${NetBoot}" = "-N" ] ; then
+	echo "Initializing NetBoot"
+	if ! sh /etc/rc.netboot start ; then
+		echo NetBoot initialization failed, shut down in 10 seconds...
+		sleep 10
+		halt
+	fi
+fi
+
+if [ "${FsckSlash}" = "-F" ]; then
+	# Benignly clean up ("preen") any dirty filesystems. 
+	# fsck -p will skip disks which were properly unmounted during
+	# a normal shutdown.
+	echo "Checking disk"
+	if [ "${SafeBoot}" = "-x" ]; then
+		fsck -fy || halt
+	else
+		fsck -p || fsck -fy || halt
+	fi
+fi
+
+echo "Mounting local filesystems"
+mount -uw /
+[ -f /etc/fstab ] && mount -vat nonfs
+
+BootCacheControl=/System/Library/Extensions/BootCache.kext/Contents/Resources/BootCacheControl
+if [ ! -f $BootCacheControl ]; then
+	BootCacheControl=/usr/sbin/BootCacheControl
+fi
+if [ "${SafeBoot}" != "-x" -a -x "${BootCacheControl}" ]; then
+	${BootCacheControl} start
+fi
+
+if [ -f /etc/sysctl-macosxserver.conf ]; then
+	awk '{ if (!index($1, "#") && index($1, "=")) print $1 }' < /etc/sysctl-macosxserver.conf | while read
+	do
+		sysctl -w ${REPLY}
+	done
+fi
+if [ -f /etc/sysctl.conf ]; then
+	awk '{ if (!index($1, "#") && index($1, "=")) print $1 }' < /etc/sysctl.conf | while read
+	do
+		sysctl -w ${REPLY}
+	done
+fi
+
+sysctl -w kern.sysv.shmmax=4194304 kern.sysv.shmmin=1 kern.sysv.shmmni=32 kern.sysv.shmseg=8 kern.sysv.shmall=1024
+
+if [ -f /var/account/acct ]; then
+	accton /var/account/acct
+fi
+
+if [ -f /etc/rc.installer_cleanup ]; then
+	/etc/rc.installer_cleanup multiuser
+fi
+
+echo "Resetting files and devices"
+
+RMRF_ITEMS="/mach.sym /var/tmp/folders.*"
+##
+# Attempt to recover the passwd file, if needed.  This procedure is
+# primarily historical and makes sense only when the passwd file is edited
+# using the vipw command.  
+##
+if [ -s /etc/ptmp ]; then
+	if [ -s /etc/passwd ]; then
+		echo -n "Passwd file conflict with ptmp: "
+		ls -l /etc/passwd /etc/ptmp
+		echo "Moving ptmp to ptmp.save"
+		mv -f /etc/ptmp /etc/ptmp.save
+	else
+		echo "Passwd file recovered from ptmp"
+		mv /etc/ptmp /etc/passwd
+	fi
+elif [ -r /etc/ptmp ]; then
+	echo "Removing passwd lock file"
+	RMRF_ITEMS="$RMRF_ITEMS /etc/ptmp"
+fi
+
+##
+# If the shutdown command was used to shut the system down, the file
+# /etc/nologin may have been created to prevent users from logging in.  
+# Remove it so that logins are enabled when the system comes up.
+##
+RMRF_ITEMS="$RMRF_ITEMS /etc/nologin"
+
+# Clean out /private/tmp.
+if [ -d /private/tmp ]; then
+	# blow away any _tmp_ in case it exists as well
+	if [ -e /private/_tmp_ ]; then
+		chflags -R -P 0 /private/_tmp_
+		rm -rf /private/_tmp_
+	fi
+	mv /private/tmp /private/_tmp_
+	chflags -R -P 0 /private/_tmp_
+	RMRF_ITEMS="$RMRF_ITEMS /private/_tmp_"
+fi
+mkdir -p -m 01777 /private/var/tmp /private/tmp
+
+# Move /var/run out of the way
+if [ -d /var/run ]; then
+	# blow away any _run_ in case it exists as well
+	if [ -e /var/_run_ ]; then
+		chflags -R -P 0 /var/_run_
+		rm -rf /var/_run_
+	fi
+	mv /var/run /var/_run_
+fi
+
+# Make new /var/run
+mkdir -m 775 /var/run
+mkdir -m 775 /var/run/StartupItems /var/run/davlocks
+mkdir -m 755 /var/run/proxy
+chown root:daemon /var/run /var/run/StartupItems
+chown www:www /var/run/proxy /var/run/davlocks
+
+# Move sudo back to /var/run, touch the contents of /var/run/sudo/* back to the epoch
+if [ -d /var/_run_/sudo ]; then
+	mv /var/_run_/sudo /var/run/sudo
+	touch -t 198501010000 /var/run/sudo/*
+fi
+
+# Clear utmp (who is logged on).
+touch /var/run/utmp /var/run/utmpx
+
+# purge the _run_ directory if it exists
+if [ -d /var/_run_ ]; then
+	chflags -R -P 0 /var/_run_
+	RMRF_ITEMS="$RMRF_ITEMS /var/_run_"
+fi
+
+# Clear /var/spool/lock
+if [ -d /var/spool/lock ]; then
+	find /var/spool/lock -not -type d -print0 | xargs -0 rm -f
+fi
+
+
+# if "/Desktop Folder" exists and has contents, make sure there is a
+#   "/Desktop (Mac OS 9)" symlink to it
+# if "/Desktop Folder" does not exist, exists but has no contents, or exists
+#   and has only a single file, ".DS_Store" then there should be no
+#   "/Desktop (Mac OS 9)" symlink
+# if there is some other file or directory with the name "/Desktop (Mac OS 9)"
+#   then just exit
+needlink=0
+if [ -d "/Desktop Folder" ]; then
+	needlink=$(ls -a1 "/Desktop Folder" | wc -l)
+	if [ "${needlink}" -eq 3 ]; then
+		if [ -f "/Desktop Folder/.DS_Store" ]; then
+			needlink=0
+		fi
+	fi
+fi
+
+if [ "${needlink}" -lt 3 ]; then
+	if [ -h "/Desktop (Mac OS 9)" ]; then
+		rm -f "/Desktop (Mac OS 9)"
+	fi
+else
+	if ! [ -e "/Desktop (Mac OS 9)" ]; then
+		ln -s "/Desktop Folder" "/Desktop (Mac OS 9)"
+	fi
+fi
+
+echo "Starting virtual memory"
+
+swapdir=/private/var/vm
+if [ "${NetBoot}" = "-N" ]; then
+    sh /etc/rc.netboot setup_vm ${swapdir}
+fi
+
+if [ ! -d ${swapdir} ]; then
+    echo "Creating default swap directory"
+    mkdir -p -m 755 ${swapdir}
+    chown root:wheel ${swapdir}
+else
+    RMRF_ITEMS="${RMRF_ITEMS} ${swapdir}/swap*"
+fi
+		    
+echo Removing $RMRF_ITEMS
+rm -rf $RMRF_ITEMS
+
+if [ ${ENCRYPTSWAP:=-NO-} = "-YES-" ]; then
+    encryptswap="-E"
+else
+    encryptswap=""
+fi
+/sbin/dynamic_pager ${encryptswap} -F ${swapdir}/swapfile
+
+appprofiledir=/private/var/vm/app_profile
+
+if [ ! -d ${appprofiledir} ]; then
+	if [ -f  ${appprofiledir} ]; then
+		mv -f ${appprofiledir} "${appprofiledir}_" 
+	fi
+	mkdir -p -m 711 ${appprofiledir}
+	chown root:wheel ${appprofiledir}
+fi
+
+# Create mach symbol file
+sysctl -n kern.symfile
+if [ -f /mach.sym ]; then
+	ln -sf /mach.sym /mach
+else
+	ln -sf /mach_kernel /mach
+fi
+
+if [ "${SafeBoot}" = "-x" ]; then
+	echo "Configuring kernel extensions for safe boot"
+	touch /private/tmp/.SafeBoot
+	kextd -x
+else
+	echo "Configuring kernel extensions"
+	kextd
+fi
+
+if [  "${SafeBoot}" != "-x" -a -x "${BootCacheControl}" ]; then
+	${BootCacheControl} tag
+fi
+
+# Create local NetInfo database if it doesn't exist
+if [ ! -d /var/db/netinfo/local.nidb ]; then
+	echo "Creating local NetInfo database"
+	mkdir -p /var/db/netinfo
+	/usr/libexec/create_nidb
+	rm -f /var/db/.AppleSetupDone
+fi
+
+if [ -f /etc/security/rc.audit ]; then
+	. /etc/security/rc.audit
+fi
+
+if [ -f /Library/Preferences/com.apple.sharing.firewall.plist ]; then
+	/usr/libexec/FirewallTool
+fi
+
+# Load [ideally on demand] daemons
+if [ "${SafeBoot}" = "-x" ]; then
+	launchctl load /System/Library/LaunchDaemons /etc/mach_init.d
+else
+	launchctl load /Library/LaunchDaemons /System/Library/LaunchDaemons /etc/mach_init.d
+	SystemStarter ${VerboseFlag}
+fi
+
+/usr/sbin/update
+
+if [ "${NetBoot}" = "-N" ]; then
+    sh /etc/rc.netboot setup_computername
+fi
+
+# Set language from CDIS.custom - assumes this is parse-able by sh
+if [ -f /var/log/CDIS.custom ]; then
+	. /var/log/CDIS.custom 
+fi
+
+# Start the Language Chooser. This code should be able to go away as far as I
+# know once loginwindow becomes more dynamic.
+STARTPBS="/System/Library/CoreServices/pbs"            # apps stall w/o
+BUDDYCOOKIE="/var/db/.AppleSetupDone"
+LCACOOKIE="/var/db/.RunLanguageChooserToo"
+STARTLCA="/System/Library/CoreServices/Language Chooser.app/Contents/MacOS/Language Chooser"
+
+if [ -x "$STARTLCA" -a -x "$STARTPBS" -a ! -f "$BUDDYCOOKIE" -a -f "$LCACOOKIE" ]; then
+	"$STARTPBS" &
+	pbspid=$!
+	"$STARTLCA"
+	kill $pbspid    # XSelect does this independently
+fi
+
+if [ ! -s "/var/log/CDIS.custom" ]; then
+	echo "Language Chooser seems to have failed; defaulting to English"
+	echo "LANGUAGE=English" > "/var/log/CDIS.custom"
+fi
+
+export LANGUAGE
+
+if [ -f /etc/rc.local ]; then
+	sh /etc/rc.local
+fi
+
+touch /var/run/.systemStarterRunning
+
+if [ "${VerboseFlag}" != "-v" ] ; then
+	/usr/libexec/WaitingForLoginWindow
+fi
+
+exit 0

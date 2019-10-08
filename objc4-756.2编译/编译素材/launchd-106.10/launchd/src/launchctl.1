@@ -1,0 +1,133 @@
+.Dd September 30, 2004
+.Dt launchctl 1
+.Os Darwin
+.Sh NAME
+.Nm launchctl
+.Nd Interfaces with launchd
+.Sh SYNOPSIS
+.Nm
+.Op Ar subcommand Op Ar arguments ...
+.Sh DESCRIPTION
+.Nm 
+interfaces with
+.Nm launchd
+to load, unload daemons/agents and generally control
+.Nm launchd .
+.Nm
+supports taking subcommands on the command line, interactively or even redirected from standard input.
+These commands can be stored in
+.Nm $HOME/.launchd.conf
+or
+.Nm /etc/launchd.conf
+to be read at the time
+.Nm launchd
+starts.
+.Sh SUBCOMMANDS
+.Bl -tag -width -indent
+.It Xo Ar load Op Fl wF
+.Ar paths ...
+.Xc
+Load the specified configuration files or directories of configuration files.
+.Bl -tag -width -indent
+.It Fl w
+Remove the disabled key and write the configuration files back out to disk.
+.It Fl F
+Force the loading of the plist. Ignore the Disabled key.
+.El
+.It Xo Ar unload Op Fl w
+.Ar paths ...
+.Xc
+Unload the specified configuration files or directories of configuration files.
+.Bl -tag -width -indent
+.It Fl w
+Add the disabled key and write the configuration files back out to disk.
+.El
+.It Ar start Ar joblabels ...
+Start the specified jobs by label.
+.It Ar stop Ar joblabels ...
+Stop the specified jobs by label. Jobs may restart automatically if demand driven.
+.It Ar list
+List all of the jobs loaded into
+.Nm launchd .
+.It Ar setenv Ar key Ar value
+Set an environmental variable inside of
+.Nm launchd .
+.It Ar unsetenv Ar key
+Unset an environmental variable inside of
+.Nm launchd .
+.It Ar getenv Ar key
+Get an environmental variable inside of
+.Nm launchd .
+.It Ar export
+Export all of the environmental variables of
+.Nm launchd
+for use in a shell eval statement.
+.It Ar getrusage self | children
+Get the resource utilization statistics for
+.Nm launchd
+or the children of
+.Nm launchd .
+.It Xo Ar log
+.Op Ar level loglevel
+.Op Ar only | mask loglevels...
+.Xc
+Get and set the
+.Xr syslog 3
+log level mask. The available log levels are: debug, info, notice, warning, error, critical, alert and emergency.
+.It Xo Ar limit
+.Op Ar cpu | filesize | data | stack | core | rss | memlock | maxproc | maxfiles
+.Op Ar both Op Ar soft | hard
+.Xc
+With no arguments, this command prints all the resource limits of
+.Nm launchd
+as found via
+.Xr getrlimit 2 .
+When a given resource is specified, it prints the limits for that resource.
+With a third argument, it sets both the hard and soft limits to that value.
+With four arguments, the third and forth argument represent the soft and hard limits respectively.
+See
+.Xr setrlimit 2 .
+.It Ar stdout path
+Set the standard out file descriptor to the given path.
+.Nm launchd
+.It Ar stderr path
+Set the standard error file descriptor to the given path.
+.Nm launchd
+.It Ar shutdown
+Tell
+.Nm launchd
+to prepare for shutdown by removing all jobs.
+.It Ar reloadttys
+Tell
+.Nm launchd
+to reread /etc/ttys. This option may go away in a future release.
+.It Ar umask Op Ar newmask
+Get or optionally set the
+.Xr umask 2
+of
+.Nm launchd .
+.It Ar help
+Print out a quick usage statement.
+.El
+.Sh ENVIRONMENTAL VARIABLES
+.Bl -tag -width -indent
+.It Pa LAUNCHD_SOCKET
+This variable informs launchctl how to find the correct launchd to talk to. If it is missing, launchctl will use a built-in default.
+.El
+.Sh FILES
+.Bl -tag -width "/System/Library/LaunchDaemons" -compact
+.It Pa ~/Library/LaunchAgents
+Per-user agents provided by the user.
+.It Pa /Library/LaunchAgents
+Per-user agents provided by the administrator.
+.It Pa /Library/LaunchDaemons
+System wide daemons provided by the administrator.
+.It Pa /System/Library/LaunchAgents
+Mac OS X Per-user agents.
+.It Pa /System/Library/LaunchDaemons
+Mac OS X System wide daemons.
+.El
+.Sh SEE ALSO 
+.Xr launchd.plist 5 ,
+.Xr launchd.conf 5 ,
+.Xr launchd 8

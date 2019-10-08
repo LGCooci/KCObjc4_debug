@@ -1,0 +1,28 @@
+#!/bin/sh
+
+##
+# IP Services
+##
+
+. /etc/rc.common
+
+StartService ()
+{
+	if [ -a /etc/com.apple.named.conf.proxy ]
+	then
+		echo "Starting Internet address sharing"
+		/usr/libexec/InternetSharing
+	fi
+}
+
+StopService ()
+{
+    return 0
+}
+
+RestartService ()
+{
+    return 0
+}
+
+RunService "$1"

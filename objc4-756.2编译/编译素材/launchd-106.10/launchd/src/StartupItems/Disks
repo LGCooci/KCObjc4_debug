@@ -1,0 +1,33 @@
+#!/bin/sh
+
+##
+# Local filesystems
+##
+
+. /etc/rc.common
+
+StartService ()
+{
+    if [ ! -f /var/db/volinfo.database ]; then Uninitialized_VSDB=-YES-; fi
+
+    echo "Checking disks"
+    /sbin/autodiskmount -va
+
+    if [ "${Uninitialized_VSDB:=-NO-}" = "-YES-" ]; then
+        if [ -x /usr/sbin/vsdbutil ]; then
+            /usr/sbin/vsdbutil -i
+        fi
+    fi
+}
+
+StopService ()
+{
+    return 0;
+}
+
+RestartService ()
+{
+    return 0;
+}
+
+RunService "$1"
