@@ -1,7 +1,11 @@
 # objc_debug
 可编译苹果官方源码objc！大家下载之后可以跑通程序员，LLDB调试，方便大家探索学习
 
+[![Build Status](https://travis-ci.org/LGCooci/objc4_debug.svg?branch=master)](https://travis-ci.org/LGCooci/objc4_debug)[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.png?v=103)](https://opensource.org/licenses/mit-license.php)
+
+
 ![](https://github.com/LGCooci/objc_debug/blob/master/objc4-756.png)
+
 
 > 很多小伙伴在探索底层的时候经常很苦恼，只能靠猜测！稍微灵活一点的小伙伴会通过 `Apple` 提供的源码来辅助看一下，但是很显然这不太直观！如果能够直接编译调试，像我们自己的代码直接 LLDB 调试，流程跟踪。那简直不要太爽，于是我编译了现在最新的`iOS_objc4-756.2` 
 
