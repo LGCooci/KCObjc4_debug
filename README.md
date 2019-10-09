@@ -1,7 +1,8 @@
 # objc_debug
 可编译苹果官方源码objc！大家下载之后可以跑通程序员，LLDB调试，方便大家探索学习
 
-[![Build Status](https://travis-ci.org/LGCooci/objc4_debug.svg?branch=master)](https://travis-ci.org/LGCooci/objc4_debug)
+[![Build Status](https://travis-ci.org/LGCooci/objc4_debug.svg?branch=master)](https://travis-ci.org/LGCooci/objc4_debug)[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.png?v=103)](https://opensource.org/licenses/mit-license.php)
+
 
 ![](https://github.com/LGCooci/objc_debug/blob/master/objc4-756.png)
 
