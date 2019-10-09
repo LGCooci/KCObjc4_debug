@@ -192,4 +192,4 @@ The i386 architecture is deprecated. You should update your ARCHS build setting 
 ### 总结
 
 iOS 现在更多的会偏向底层开发研究，可调式编译的 `objc4 源码`能够帮助更快速学习和更容易理解！博客持续更新中，谢谢大家的关注点赞！Thanks♪(･ω･)ﾉ
-更多博客请关注：(Cooci)[https://juejin.im/user/5c3f3c415188252b7d0ea40c/posts]
+更多博客请关注：[Cooci 掘金博客地址](https://juejin.im/user/5c3f3c415188252b7d0ea40c/posts)
