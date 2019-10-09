@@ -1,11 +1,11 @@
 language: objective-c
-xcode_project: objc4-756.2编译/objc4-756.2可编译/objc.xcodeproj
-xcode_scheme: objc-debug
+xcode_project: objc4-756.2/objc4-756.2/objc.xcodeproj
+xcode_scheme: objc
 osx_image: xcode10.1
 
 script:
 - set -o pipefail
-- xcodebuild test -project "$TRAVIS_XCODE_PROJECT" -scheme "$TRAVIS_XCODE_SCHEME" -destination "arch=x86_64" -enableCodeCoverage YES | xcpretty
+- xcodebuild test -project "$TRAVIS_XCODE_PROJECT" -scheme "$TRAVIS_XCODE_SCHEME" -destination "name=My Mac" -enableCodeCoverage YES | xcpretty
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
