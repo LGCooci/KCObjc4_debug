@@ -5,7 +5,7 @@ osx_image: xcode10.1
 
 script:
 - set -o pipefail
-- xcodebuild clean build -project "$TRAVIS_XCODE_PROJECT" -scheme "$TRAVIS_XCODE_SCHEME" -destination "name=My Mac" -enableCodeCoverage YES | xcpretty
+- xcodebuild clean build -project "$TRAVIS_XCODE_PROJECT" -scheme "$TRAVIS_XCODE_SCHEME" -destination "name=My Mac" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
