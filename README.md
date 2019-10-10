@@ -1,5 +1,5 @@
 # objc_debug
-可编译苹果官方源码objc！大家下载之后可以跑通程序员，LLDB调试，方便大家探索学习
+可编译苹果官方源码objc！可编译源码，LLDB调试，方便大家探索学习！
 
 [![Build Status](https://travis-ci.org/LGCooci/objc4_debug.svg?branch=master)](https://travis-ci.org/LGCooci/objc4_debug)
 [![Xcode 10.0+](https://img.shields.io/badge/Xcode-10.0%2B-blue.svg?colorA=3caefc&colorB=24292e)](https://developer.apple.com/xcode/)
