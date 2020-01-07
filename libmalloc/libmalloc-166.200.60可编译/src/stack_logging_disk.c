@@ -1298,8 +1298,8 @@ __disk_stack_logging_log_stack(uint32_t type_flags,
 
 	if (stack_logging_mode_lite_or_vmlite && (type_flags & stack_logging_type_vm_deallocate)) {
 		if (pre_write_buffers && pre_write_buffers->vm_stackid_table) {
-			radix_tree_delete(&pre_write_buffers->vm_stackid_table,
-							  trunc_page(ptr_arg), round_page(ptr_arg + size) - trunc_page(ptr_arg));
+//			radix_tree_delete(&pre_write_buffers->vm_stackid_table,
+//							  trunc_page(ptr_arg), round_page(ptr_arg + size) - trunc_page(ptr_arg));
 			goto out;
 		}
 	}
@@ -1342,15 +1342,15 @@ __disk_stack_logging_log_stack(uint32_t type_flags,
 	if (stack_logging_mode_lite_or_vmlite && (type_flags & stack_logging_type_vm_allocate)) {
 		if (pre_write_buffers) {
 			if (!pre_write_buffers->vm_stackid_table) {
-				pre_write_buffers->vm_stackid_table	= radix_tree_create();
-				pre_write_buffers->vm_stackid_table_size = radix_tree_size(pre_write_buffers->vm_stackid_table);
+//				pre_write_buffers->vm_stackid_table	= radix_tree_create();
+//				pre_write_buffers->vm_stackid_table_size = radix_tree_size(pre_write_buffers->vm_stackid_table);
 			}
 			if (pre_write_buffers->vm_stackid_table) {
-				uint64_t address = return_val;
-				radix_tree_insert(&pre_write_buffers->vm_stackid_table,
-								  trunc_page(address), round_page(address+size) - trunc_page(address),
-								  uniqueStackIdentifier);
-				pre_write_buffers->vm_stackid_table_size = radix_tree_size(pre_write_buffers->vm_stackid_table);
+//				uint64_t address = return_val;
+//				radix_tree_insert(&pre_write_buffers->vm_stackid_table,
+//								  trunc_page(address), round_page(address+size) - trunc_page(address),
+//								  uniqueStackIdentifier);
+//				pre_write_buffers->vm_stackid_table_size = radix_tree_size(pre_write_buffers->vm_stackid_table);
 			}
 		}
 		goto out;
@@ -2472,7 +2472,7 @@ __mach_stack_logging_stackid_for_vm_region(task_t task, mach_vm_address_t addres
 	uint64_t stackid = __invalid_stack_id;
 
 	if (remote_fd->cache && remote_fd->cache->vm_stackid_table) {
-		stackid = radix_tree_lookup(remote_fd->cache->vm_stackid_table, address);
+//		stackid = radix_tree_lookup(remote_fd->cache->vm_stackid_table, address);
 	}
 
 	release_file_streams_for_task(task);

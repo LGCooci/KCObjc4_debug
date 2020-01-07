@@ -10,7 +10,7 @@
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
 		
-		void *p = calloc(1, 24);
+		void *p = calloc(1, 40);
 		NSLog(@"%lu",malloc_size(p));
     }
     return 0;
