@@ -3,14 +3,14 @@
  * Copyright (c) 2003-2010 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
- *
+ * 
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
  * Version 2.0 (the 'License'). You may not use this file except in
  * compliance with the License. Please obtain a copy of the License at
  * http://www.opensource.apple.com/apsl/ and read it before using this
  * file.
- *
+ * 
  * The Original Code and all software distributed under the License are
  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
@@ -18,7 +18,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
  * Please see the License for the specific language governing rights and
  * limitations under the License.
- *
+ * 
  * @APPLE_LICENSE_HEADER_END@
  */
 #ifndef _MACH_O_DYLD_PRIV_H_
@@ -73,7 +73,7 @@ void _dyld_objc_notify_register(_dyld_objc_notify_mapped    mapped,
 
 
 //
-// get slide for a given loaded mach_header
+// get slide for a given loaded mach_header  
 // Mac OS X 10.6 and later
 //
 extern intptr_t _dyld_get_image_slide(const struct mach_header* mh);
@@ -82,23 +82,23 @@ extern intptr_t _dyld_get_image_slide(const struct mach_header* mh);
 
 struct dyld_unwind_sections
 {
-    const struct mach_header*        mh;
-    const void*                        dwarf_section;
-    uintptr_t                        dwarf_section_length;
-    const void*                        compact_unwind_section;
-    uintptr_t                        compact_unwind_section_length;
+	const struct mach_header*		mh;
+	const void*						dwarf_section;
+	uintptr_t						dwarf_section_length;
+	const void*						compact_unwind_section;
+	uintptr_t						compact_unwind_section_length;
 };
 
 
 //
 // Returns true iff some loaded mach-o image contains "addr".
-//    info->mh                            mach header of image containing addr
-//  info->dwarf_section                    pointer to start of __TEXT/__eh_frame section
-//  info->dwarf_section_length            length of __TEXT/__eh_frame section
-//  info->compact_unwind_section        pointer to start of __TEXT/__unwind_info section
-//  info->compact_unwind_section_length    length of __TEXT/__unwind_info section
+//	info->mh							mach header of image containing addr
+//  info->dwarf_section					pointer to start of __TEXT/__eh_frame section
+//  info->dwarf_section_length			length of __TEXT/__eh_frame section
+//  info->compact_unwind_section		pointer to start of __TEXT/__unwind_info section
+//  info->compact_unwind_section_length	length of __TEXT/__unwind_info section
 //
-// Exists in Mac OS X 10.6 and later
+// Exists in Mac OS X 10.6 and later 
 #if !__USING_SJLJ_EXCEPTIONS__
 extern bool _dyld_find_unwind_sections(void* addr, struct dyld_unwind_sections* info);
 #endif
@@ -107,7 +107,7 @@ extern bool _dyld_find_unwind_sections(void* addr, struct dyld_unwind_sections* 
 //
 // This is an optimized form of dladdr() that only returns the dli_fname field.
 //
-// Exists in Mac OS X 10.6 and later
+// Exists in Mac OS X 10.6 and later 
 extern const char* dyld_image_path_containing_address(const void* addr);
 
 
@@ -191,7 +191,7 @@ extern void dyld_get_image_versions(const struct mach_header* mh, void (^callbac
 // This finds the SDK version a binary was built against.
 // Returns zero on error, or if SDK version could not be determined.
 //
-// Exists in Mac OS X 10.8 and later
+// Exists in Mac OS X 10.8 and later 
 // Exists in iOS 6.0 and later
 extern uint32_t dyld_get_sdk_version(const struct mach_header* mh);
 
@@ -204,7 +204,7 @@ extern uint32_t dyld_get_sdk_version(const struct mach_header* mh);
 // (i.e an app built against watchOS 2.0 SDK returne 9.0).  To see the
 // platform specific sdk version use dyld_get_program_sdk_watch_os_version().
 //
-// Exists in Mac OS X 10.8 and later
+// Exists in Mac OS X 10.8 and later 
 // Exists in iOS 6.0 and later
 extern uint32_t dyld_get_program_sdk_version(void);
 
@@ -241,7 +241,7 @@ extern uint32_t dyld_get_program_min_bridge_os_version(void) __API_AVAILABLE(bri
 // This finds the min OS version a binary was built to run on.
 // Returns zero on error, or if no min OS recorded in binary.
 //
-// Exists in Mac OS X 10.8 and later
+// Exists in Mac OS X 10.8 and later 
 // Exists in iOS 6.0 and later
 extern uint32_t dyld_get_min_os_version(const struct mach_header* mh);
 
@@ -250,7 +250,7 @@ extern uint32_t dyld_get_min_os_version(const struct mach_header* mh);
 // This finds the min OS version the main executable was built to run on.
 // Returns zero on error, or if no min OS recorded in binary.
 //
-// Exists in Mac OS X 10.8 and later
+// Exists in Mac OS X 10.8 and later 
 // Exists in iOS 6.0 and later
 extern uint32_t dyld_get_program_min_os_version(void);
 
@@ -260,12 +260,12 @@ extern uint32_t dyld_get_program_min_os_version(void);
 //
 // Returns if any OS dylib has overridden its copy in the shared cache
 //
-// Exists in iPhoneOS 3.1 and later
+// Exists in iPhoneOS 3.1 and later 
 // Exists in Mac OS X 10.10 and later
 extern bool dyld_shared_cache_some_image_overridden(void);
 
 
-    
+	
 //
 // Returns if the process is setuid or is code signed with entitlements.
 //
@@ -297,28 +297,28 @@ extern bool dyld_has_inserted_or_interposing_libraries(void);
 
 
 //
-// Update all bindings on specified image.
+// Update all bindings on specified image. 
 // Looks for uses of 'replacement' and changes it to 'replacee'.
 // NOTE: this is less safe than using static interposing via DYLD_INSERT_LIBRARIES
 // because the running program may have already copy the pointer values to other
 // locations that dyld does not know about.
 //
 struct dyld_interpose_tuple {
-    const void* replacement;
-    const void* replacee;
+	const void* replacement;
+	const void* replacee;
 };
 extern void dyld_dynamic_interpose(const struct mach_header* mh, const struct dyld_interpose_tuple array[], size_t count);
 
 
 struct dyld_shared_cache_dylib_text_info {
-    uint64_t        version;        // current version 1
-    // following fields all exist in version 1
-    uint64_t        loadAddressUnslid;
-    uint64_t        textSegmentSize;
-    uuid_t            dylibUuid;
-    const char*        path;            // pointer invalid at end of iterations
-    // following fields all exist in version 2
-    uint64_t        textSegmentOffset;  // offset from start of cache
+	uint64_t		version;		// current version 1
+	// following fields all exist in version 1
+	uint64_t		loadAddressUnslid;
+	uint64_t		textSegmentSize; 
+	uuid_t			dylibUuid;
+	const char*		path;			// pointer invalid at end of iterations
+	// following fields all exist in version 2
+	uint64_t        textSegmentOffset;  // offset from start of cache
 };
 typedef struct dyld_shared_cache_dylib_text_info dyld_shared_cache_dylib_text_info;
 
@@ -406,7 +406,7 @@ extern bool dyld_need_closure(const char* execPath, const char* tempDir);
 
 struct dyld_image_uuid_offset {
     uuid_t                      uuid;
-    uint64_t                    offsetInImage;
+	uint64_t                    offsetInImage;
     const struct mach_header*   image;
 };
 
@@ -473,12 +473,12 @@ extern void _dyld_register_driverkit_main(void (*mainFunc)(void));
 // payload for the corresponding string.  If the offset is zero, that string is not available.
 //
 struct dyld_abort_payload {
-    uint32_t version;                   // first version is 1
-    uint32_t flags;                     // 0x00000001 means dyld terminated at launch, backtrace not useful
-    uint32_t targetDylibPathOffset;     // offset in payload of path string to dylib that could not be loaded
-    uint32_t clientPathOffset;          // offset in payload of path string to image requesting dylib
-    uint32_t symbolOffset;              // offset in payload of symbol string that could not be found
-    // string data
+	uint32_t version;                   // first version is 1
+	uint32_t flags;                     // 0x00000001 means dyld terminated at launch, backtrace not useful
+	uint32_t targetDylibPathOffset;     // offset in payload of path string to dylib that could not be loaded
+	uint32_t clientPathOffset;          // offset in payload of path string to image requesting dylib
+	uint32_t symbolOffset;              // offset in payload of symbol string that could not be found
+	// string data
 };
 typedef struct dyld_abort_payload dyld_abort_payload;
 

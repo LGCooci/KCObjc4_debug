@@ -50,7 +50,8 @@
 		75A9504F202BAA0600D7D56F /* objc-locks-new.h in Headers */ = {isa = PBXBuildFile; fileRef = 75A9504E202BAA0300D7D56F /* objc-locks-new.h */; };
 		75A95051202BAA9A00D7D56F /* objc-locks.h in Headers */ = {isa = PBXBuildFile; fileRef = 75A95050202BAA9A00D7D56F /* objc-locks.h */; };
 		75A95053202BAC4100D7D56F /* objc-lockdebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 75A95052202BAC4100D7D56F /* objc-lockdebug.h */; };
-		7A88074D24C9EAD50070C15B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A88074C24C9EAD50070C15B /* main.m */; };
+		7A88076124CACD200070C15B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A88076024CACD200070C15B /* main.m */; };
+		7A88076724CACD8C0070C15B /* LGPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A88076624CACD8C0070C15B /* LGPerson.m */; };
 		8306440920D24A5D00E356D2 /* objc-block-trampolines.h in Headers */ = {isa = PBXBuildFile; fileRef = 8306440620D24A3E00E356D2 /* objc-block-trampolines.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		830F2A740D737FB800392440 /* objc-msg-arm.s in Sources */ = {isa = PBXBuildFile; fileRef = 830F2A690D737FB800392440 /* objc-msg-arm.s */; };
 		830F2A750D737FB900392440 /* objc-msg-i386.s in Sources */ = {isa = PBXBuildFile; fileRef = 830F2A6A0D737FB800392440 /* objc-msg-i386.s */; };
@@ -152,7 +153,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		7A88074824C9EAD50070C15B /* CopyFiles */ = {
+		7A88075C24CACD200070C15B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -182,8 +183,10 @@
 		75A9504E202BAA0300D7D56F /* objc-locks-new.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "objc-locks-new.h"; path = "runtime/objc-locks-new.h"; sourceTree = "<group>"; };
 		75A95050202BAA9A00D7D56F /* objc-locks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-locks.h"; path = "runtime/objc-locks.h"; sourceTree = "<group>"; };
 		75A95052202BAC4100D7D56F /* objc-lockdebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-lockdebug.h"; path = "runtime/objc-lockdebug.h"; sourceTree = "<group>"; };
-		7A88074A24C9EAD50070C15B /* KCObjc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KCObjc; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A88074C24C9EAD50070C15B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7A88075E24CACD200070C15B /* KCObjc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KCObjc; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A88076024CACD200070C15B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7A88076524CACD8C0070C15B /* LGPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGPerson.h; sourceTree = "<group>"; };
+		7A88076624CACD8C0070C15B /* LGPerson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGPerson.m; sourceTree = "<group>"; };
 		8306440620D24A3E00E356D2 /* objc-block-trampolines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "objc-block-trampolines.h"; path = "runtime/objc-block-trampolines.h"; sourceTree = "<group>"; };
 		830F2A690D737FB800392440 /* objc-msg-arm.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; name = "objc-msg-arm.s"; path = "runtime/Messengers.subproj/objc-msg-arm.s"; sourceTree = "<group>"; };
 		830F2A6A0D737FB800392440 /* objc-msg-i386.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; name = "objc-msg-i386.s"; path = "runtime/Messengers.subproj/objc-msg-i386.s"; sourceTree = "<group>"; };
@@ -276,7 +279,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7A88074724C9EAD50070C15B /* Frameworks */ = {
+		7A88075B24CACD200070C15B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -311,7 +314,7 @@
 				838486270D6D690F00CEA253 /* Obsolete Source */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				838485B20D6D67F900CEA253 /* Other */,
-				7A88074B24C9EAD50070C15B /* KCObjc */,
+				7A88075F24CACD200070C15B /* KCObjc */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 				F9BCC72A205C6A1600DD9AFC /* Frameworks */,
 			);
@@ -375,15 +378,17 @@
 			children = (
 				D2AAC0630554660B00DB518D /* libobjc.A.dylib */,
 				F9BCC727205C68E800DD9AFC /* libobjc-trampolines.dylib */,
-				7A88074A24C9EAD50070C15B /* KCObjc */,
+				7A88075E24CACD200070C15B /* KCObjc */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7A88074B24C9EAD50070C15B /* KCObjc */ = {
+		7A88075F24CACD200070C15B /* KCObjc */ = {
 			isa = PBXGroup;
 			children = (
-				7A88074C24C9EAD50070C15B /* main.m */,
+				7A88076024CACD200070C15B /* main.m */,
+				7A88076524CACD8C0070C15B /* LGPerson.h */,
+				7A88076624CACD8C0070C15B /* LGPerson.m */,
 			);
 			path = KCObjc;
 			sourceTree = "<group>";
@@ -568,13 +573,13 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		7A88074924C9EAD50070C15B /* KCObjc */ = {
+		7A88075D24CACD200070C15B /* KCObjc */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7A88074E24C9EAD50070C15B /* Build configuration list for PBXNativeTarget "KCObjc" */;
+			buildConfigurationList = 7A88076224CACD200070C15B /* Build configuration list for PBXNativeTarget "KCObjc" */;
 			buildPhases = (
-				7A88074624C9EAD50070C15B /* Sources */,
-				7A88074724C9EAD50070C15B /* Frameworks */,
-				7A88074824C9EAD50070C15B /* CopyFiles */,
+				7A88075A24CACD200070C15B /* Sources */,
+				7A88075B24CACD200070C15B /* Frameworks */,
+				7A88075C24CACD200070C15B /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -582,7 +587,7 @@
 			);
 			name = KCObjc;
 			productName = KCObjc;
-			productReference = 7A88074A24C9EAD50070C15B /* KCObjc */;
+			productReference = 7A88075E24CACD200070C15B /* KCObjc */;
 			productType = "com.apple.product-type.tool";
 		};
 		D2AAC0620554660B00DB518D /* objc */ = {
@@ -630,7 +635,7 @@
 			attributes = {
 				LastUpgradeCheck = 0440;
 				TargetAttributes = {
-					7A88074924C9EAD50070C15B = {
+					7A88075D24CACD200070C15B = {
 						CreatedOnToolsVersion = 11.5;
 						DevelopmentTeam = PPW9FUQJ5U;
 						ProvisioningStyle = Automatic;
@@ -663,7 +668,7 @@
 				837F67A81A771F63004D34FA /* objc-simulator */,
 				F9BCC6CA205C68E800DD9AFC /* objc-trampolines */,
 				834F9B01212E560100F95A54 /* objc4_tests */,
-				7A88074924C9EAD50070C15B /* KCObjc */,
+				7A88075D24CACD200070C15B /* KCObjc */,
 			);
 		};
 /* End PBXProject section */
@@ -719,11 +724,12 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7A88074624C9EAD50070C15B /* Sources */ = {
+		7A88075A24CACD200070C15B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A88074D24C9EAD50070C15B /* main.m in Sources */,
+				7A88076124CACD200070C15B /* main.m in Sources */,
+				7A88076724CACD8C0070C15B /* LGPerson.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -817,17 +823,18 @@
 				GCC_CW_ASM_SYNTAX = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					LIBC_NO_LIBCRASHREPORTERCLIENT,
 					"OS_OBJECT_USE_OBJC=0",
+					"OBJC_IS_DEBUG_BUILD=1",
+					LIBC_NO_LIBCRASHREPORTERCLIENT,
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/KCCommon",
 					"$(DSTROOT)/usr/include/**",
 					"$(DSTROOT)/usr/local/include/**",
 					"$(CONFIGURATION_BUILD_DIR)/usr/include/**",
 					"$(CONFIGURATION_BUILD_DIR)/usr/local/include/**",
 					/System/Library/Frameworks/System.framework/PrivateHeaders,
-					"$(SRCROOT)/KCCommom",
 				);
 				INSTALL_PATH = /usr/lib;
 				IS_ZIPPERED = YES;
@@ -881,7 +888,7 @@
 				PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include/objc;
 				PRODUCT_NAME = objc.A;
 				PUBLIC_HEADERS_FOLDER_PATH = /usr/include/objc;
-				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
 				SUPPORTS_TEXT_BASED_API = YES;
 				TAPI_VERIFY_MODE = Pedantic;
 				UNEXPORTED_SYMBOLS_FILE = unexported_symbols;
@@ -898,18 +905,14 @@
 				DYLIB_CURRENT_VERSION = 228;
 				EXECUTABLE_PREFIX = lib;
 				GCC_CW_ASM_SYNTAX = NO;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					LIBC_NO_LIBCRASHREPORTERCLIENT,
-					"OS_OBJECT_USE_OBJC=0",
-				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/KCCommon",
 					"$(DSTROOT)/usr/include/**",
 					"$(DSTROOT)/usr/local/include/**",
 					"$(CONFIGURATION_BUILD_DIR)/usr/include/**",
 					"$(CONFIGURATION_BUILD_DIR)/usr/local/include/**",
 					/System/Library/Frameworks/System.framework/PrivateHeaders,
-					"$(SRCROOT)/KCCommon",
 				);
 				INSTALL_PATH = /usr/lib;
 				IS_ZIPPERED = YES;
@@ -944,6 +947,7 @@
 					interposable.txt,
 				);
 				"OTHER_LDFLAGS[sdk=macosx*]" = (
+					"-lCrashReporterClient",
 					"-lc++abi",
 					"-Xlinker",
 					"-sectalign",
@@ -962,7 +966,7 @@
 				PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include/objc;
 				PRODUCT_NAME = objc.A;
 				PUBLIC_HEADERS_FOLDER_PATH = /usr/include/objc;
-				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
 				SUPPORTS_TEXT_BASED_API = YES;
 				TAPI_VERIFY_MODE = Pedantic;
 				UNEXPORTED_SYMBOLS_FILE = unexported_symbols;
@@ -1005,8 +1009,8 @@
 					"$(OTHER_CFLAGS)",
 					"-D_LIBCPP_VISIBLE=\"\"",
 				);
-				SDKROOT = macosx.internal;
-				SUPPORTED_PLATFORMS = "macosx iphoneos appletvos watchos";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
 				WARNING_CFLAGS = (
 					"-Wall",
 					"-Wextra",
@@ -1053,8 +1057,8 @@
 					"$(OTHER_CFLAGS)",
 					"-D_LIBCPP_VISIBLE=\"\"",
 				);
-				SDKROOT = macosx.internal;
-				SUPPORTED_PLATFORMS = "macosx iphoneos appletvos watchos";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
 				WARNING_CFLAGS = (
 					"-Wall",
 					"-Wextra",
@@ -1067,7 +1071,7 @@
 			};
 			name = Release;
 		};
-		7A88074F24C9EAD50070C15B /* Debug */ = {
+		7A88076324CACD200070C15B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1119,11 +1123,10 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
-		7A88075024C9EAD50070C15B /* Release */ = {
+		7A88076424CACD200070C15B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1169,7 +1172,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -1237,7 +1239,6 @@
 				PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include/objc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = /usr/include/objc;
-				SDKROOT = macosx;
 				SUPPORTS_TEXT_BASED_API = YES;
 				TAPI_VERIFY_MODE = Pedantic;
 			};
@@ -1273,7 +1274,6 @@
 				PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include/objc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = /usr/include/objc;
-				SDKROOT = macosx;
 				SUPPORTS_TEXT_BASED_API = YES;
 				TAPI_VERIFY_MODE = Pedantic;
 			};
@@ -1300,11 +1300,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7A88074E24C9EAD50070C15B /* Build configuration list for PBXNativeTarget "KCObjc" */ = {
+		7A88076224CACD200070C15B /* Build configuration list for PBXNativeTarget "KCObjc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7A88074F24C9EAD50070C15B /* Debug */,
-				7A88075024C9EAD50070C15B /* Release */,
+				7A88076324CACD200070C15B /* Debug */,
+				7A88076424CACD200070C15B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

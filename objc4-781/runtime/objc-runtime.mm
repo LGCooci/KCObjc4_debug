@@ -121,7 +121,7 @@ id objc_noop_imp(id self, SEL _cmd __unused) {
 * Some test code looks for the presence of this symbol.
 **********************************************************************/
 #if DEBUG != OBJC_IS_DEBUG_BUILD
-// #error mismatch in debug-ness macros
+#error mismatch in debug-ness macros
 // DEBUG is used in our code. OBJC_IS_DEBUG_BUILD is used in the
 // header declaration of _objc_isDebugBuild() because that header
 // is visible to other clients who might have their own DEBUG macro.

@@ -55,28 +55,28 @@ OS_ASSUME_NONNULL_BEGIN
 #if defined(__cplusplus) && __cplusplus >= 201103L
 
 #define OS_LOCK_DECL(type, size) \
-        typedef OS_LOCK_STRUCT(type) : public OS_LOCK(base) { \
-            private: \
-            OS_LOCK_TYPE_STRUCT(type) * osl_type OS_UNUSED; \
-            uintptr_t _osl_##type##_opaque[size-1] OS_UNUSED; \
-            public: \
-            constexpr OS_LOCK(type)() : \
-                osl_type(&OS_LOCK_TYPE_REF(type)), _osl_##type##_opaque() {} \
-        } OS_LOCK(type)
+		typedef OS_LOCK_STRUCT(type) : public OS_LOCK(base) { \
+			private: \
+			OS_LOCK_TYPE_STRUCT(type) * osl_type OS_UNUSED; \
+			uintptr_t _osl_##type##_opaque[size-1] OS_UNUSED; \
+			public: \
+			constexpr OS_LOCK(type)() : \
+				osl_type(&OS_LOCK_TYPE_REF(type)), _osl_##type##_opaque() {} \
+		} OS_LOCK(type)
 #define OS_LOCK_INIT(type) {}
 
 typedef OS_LOCK_STRUCT(base) {
-    protected:
-    constexpr OS_LOCK(base)() {}
+	protected:
+	constexpr OS_LOCK(base)() {}
 } *os_lock_t;
 
 #else
 
 #define OS_LOCK_DECL(type, size) \
-        typedef OS_LOCK_STRUCT(type) { \
-            OS_LOCK_TYPE_STRUCT(type) * osl_type; \
-            uintptr_t _osl_##type##_opaque[size-1]; \
-        } OS_LOCK(type)
+		typedef OS_LOCK_STRUCT(type) { \
+			OS_LOCK_TYPE_STRUCT(type) * osl_type; \
+			uintptr_t _osl_##type##_opaque[size-1]; \
+		} OS_LOCK(type)
 
 #define OS_LOCK_INIT(type) { .osl_type = &OS_LOCK_TYPE_REF(type), }
 
@@ -85,11 +85,11 @@ typedef OS_LOCK_STRUCT(base) {
 #endif
 
 typedef OS_TRANSPARENT_UNION union {
-    OS_LOCK_T_MEMBER(base);
-    OS_LOCK_T_MEMBER(unfair);
-    OS_LOCK_T_MEMBER(nospin);
-    OS_LOCK_T_MEMBER(spin);
-    OS_LOCK_T_MEMBER(handoff);
+	OS_LOCK_T_MEMBER(base);
+	OS_LOCK_T_MEMBER(unfair);
+	OS_LOCK_T_MEMBER(nospin);
+	OS_LOCK_T_MEMBER(spin);
+	OS_LOCK_T_MEMBER(handoff);
 } os_lock_t;
 
 #endif
@@ -278,19 +278,19 @@ void os_lock_unlock(os_lock_t lock);
  * where the protected critical section is always extremely short.
  */
 OS_OPTIONS(os_unfair_lock_options, uint32_t,
-    OS_UNFAIR_LOCK_NONE OS_SWIFT_NAME(None)
-        OS_UNFAIR_LOCK_AVAILABILITY = 0x00000000,
-    OS_UNFAIR_LOCK_DATA_SYNCHRONIZATION OS_SWIFT_NAME(DataSynchronization)
-        OS_UNFAIR_LOCK_AVAILABILITY = 0x00010000,
-    OS_UNFAIR_LOCK_ADAPTIVE_SPIN OS_SWIFT_NAME(AdaptiveSpin)
-        __API_AVAILABLE(macos(10.15), ios(13.0),
-        tvos(13.0), watchos(6.0)) = 0x00040000
+	OS_UNFAIR_LOCK_NONE OS_SWIFT_NAME(None)
+		OS_UNFAIR_LOCK_AVAILABILITY = 0x00000000,
+	OS_UNFAIR_LOCK_DATA_SYNCHRONIZATION OS_SWIFT_NAME(DataSynchronization)
+		OS_UNFAIR_LOCK_AVAILABILITY = 0x00010000,
+	OS_UNFAIR_LOCK_ADAPTIVE_SPIN OS_SWIFT_NAME(AdaptiveSpin)
+		__API_AVAILABLE(macos(10.15), ios(13.0),
+		tvos(13.0), watchos(6.0)) = 0x00040000
 );
 
 #if __swift__
 #define OS_UNFAIR_LOCK_OPTIONS_COMPAT_FOR_SWIFT(name) \
-        static const os_unfair_lock_options_t \
-        name##_FOR_SWIFT OS_SWIFT_NAME(name) = name
+		static const os_unfair_lock_options_t \
+		name##_FOR_SWIFT OS_SWIFT_NAME(name) = name
 OS_UNFAIR_LOCK_OPTIONS_COMPAT_FOR_SWIFT(OS_UNFAIR_LOCK_NONE);
 OS_UNFAIR_LOCK_OPTIONS_COMPAT_FOR_SWIFT(OS_UNFAIR_LOCK_DATA_SYNCHRONIZATION);
 OS_UNFAIR_LOCK_OPTIONS_COMPAT_FOR_SWIFT(OS_UNFAIR_LOCK_ADAPTIVE_SPIN);
@@ -312,7 +312,7 @@ OS_UNFAIR_LOCK_OPTIONS_COMPAT_FOR_SWIFT(OS_UNFAIR_LOCK_ADAPTIVE_SPIN);
 OS_UNFAIR_LOCK_AVAILABILITY
 OS_EXPORT OS_NOTHROW OS_NONNULL_ALL
 void os_unfair_lock_lock_with_options(os_unfair_lock_t lock,
-        os_unfair_lock_options_t options);
+		os_unfair_lock_options_t options);
 
 /*! @group os_unfair_lock no-TSD interfaces
  *
@@ -343,21 +343,21 @@ void os_unfair_lock_unlock_no_tsd_4libpthread(os_unfair_lock_t lock);
  */
 
 #define OS_UNFAIR_RECURSIVE_LOCK_AVAILABILITY \
-        __OSX_AVAILABLE(10.14) __IOS_AVAILABLE(12.0) \
-        __TVOS_AVAILABLE(12.0) __WATCHOS_AVAILABLE(5.0)
+		__OSX_AVAILABLE(10.14) __IOS_AVAILABLE(12.0) \
+		__TVOS_AVAILABLE(12.0) __WATCHOS_AVAILABLE(5.0)
 
 #if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
 #define OS_UNFAIR_RECURSIVE_LOCK_INIT \
-        ((os_unfair_recursive_lock){OS_UNFAIR_LOCK_INIT, 0})
+		((os_unfair_recursive_lock){OS_UNFAIR_LOCK_INIT, 0})
 #elif defined(__cplusplus) && __cplusplus >= 201103L
 #define OS_UNFAIR_RECURSIVE_LOCK_INIT \
-        (os_unfair_recursive_lock{OS_UNFAIR_LOCK_INIT, 0})
+		(os_unfair_recursive_lock{OS_UNFAIR_LOCK_INIT, 0})
 #elif defined(__cplusplus)
 #define OS_UNFAIR_RECURSIVE_LOCK_INIT (os_unfair_recursive_lock(\
-        (os_unfair_recursive_lock){OS_UNFAIR_LOCK_INIT, 0}))
+		(os_unfair_recursive_lock){OS_UNFAIR_LOCK_INIT, 0}))
 #else
 #define OS_UNFAIR_RECURSIVE_LOCK_INIT \
-        {OS_UNFAIR_LOCK_INIT, 0}
+		{OS_UNFAIR_LOCK_INIT, 0}
 #endif // OS_UNFAIR_RECURSIVE_LOCK_INIT
 
 /*!
@@ -372,8 +372,8 @@ void os_unfair_lock_unlock_no_tsd_4libpthread(os_unfair_lock_t lock);
  */
 OS_UNFAIR_RECURSIVE_LOCK_AVAILABILITY
 typedef struct os_unfair_recursive_lock_s {
-    os_unfair_lock ourl_lock;
-    uint32_t ourl_count;
+	os_unfair_lock ourl_lock;
+	uint32_t ourl_count;
 } os_unfair_recursive_lock, *os_unfair_recursive_lock_t;
 
 /*!
@@ -385,7 +385,7 @@ typedef struct os_unfair_recursive_lock_s {
 OS_UNFAIR_RECURSIVE_LOCK_AVAILABILITY
 OS_EXPORT OS_NOTHROW OS_NONNULL_ALL
 void os_unfair_recursive_lock_lock_with_options(os_unfair_recursive_lock_t lock,
-        os_unfair_lock_options_t options);
+		os_unfair_lock_options_t options);
 
 /*!
  * @function os_unfair_recursive_lock_lock
@@ -398,7 +398,7 @@ OS_INLINE OS_ALWAYS_INLINE OS_NOTHROW OS_NONNULL_ALL
 void
 os_unfair_recursive_lock_lock(os_unfair_recursive_lock_t lock)
 {
-    os_unfair_recursive_lock_lock_with_options(lock, OS_UNFAIR_LOCK_NONE);
+	os_unfair_recursive_lock_lock_with_options(lock, OS_UNFAIR_LOCK_NONE);
 }
 
 /*!
@@ -442,7 +442,7 @@ OS_INLINE OS_ALWAYS_INLINE OS_NOTHROW OS_NONNULL_ALL
 void
 os_unfair_recursive_lock_assert_owner(os_unfair_recursive_lock_t lock)
 {
-    os_unfair_lock_assert_owner(&lock->ourl_lock);
+	os_unfair_lock_assert_owner(&lock->ourl_lock);
 }
 
 /*!
@@ -456,7 +456,7 @@ OS_INLINE OS_ALWAYS_INLINE OS_NOTHROW OS_NONNULL_ALL
 void
 os_unfair_recursive_lock_assert_not_owner(os_unfair_recursive_lock_t lock)
 {
-    os_unfair_lock_assert_not_owner(&lock->ourl_lock);
+	os_unfair_lock_assert_not_owner(&lock->ourl_lock);
 }
 
 /*!
@@ -519,7 +519,7 @@ OS_INLINE OS_ALWAYS_INLINE OS_NOTHROW OS_NONNULL_ALL
 void
 os_unfair_lock_scoped_guard_unlock(os_unfair_lock_t _Nonnull * _Nonnull lock)
 {
-    os_unfair_lock_unlock(*lock);
+	os_unfair_lock_unlock(*lock);
 }
 
 /*!
@@ -539,10 +539,10 @@ os_unfair_lock_scoped_guard_unlock(os_unfair_lock_t _Nonnull * _Nonnull lock)
  * @see os_unfair_lock_unlock
  */
 #define os_unfair_lock_lock_scoped_guard(guard_name, lock) \
-    os_unfair_lock_t \
-        __attribute__((cleanup(os_unfair_lock_scoped_guard_unlock))) \
-        guard_name = lock; \
-    os_unfair_lock_lock(guard_name)
+	os_unfair_lock_t \
+		__attribute__((cleanup(os_unfair_lock_scoped_guard_unlock))) \
+		guard_name = lock; \
+	os_unfair_lock_lock(guard_name)
 
 #endif // __has_attribute(cleanup)
 
@@ -618,16 +618,16 @@ OS_INLINE OS_ALWAYS_INLINE OS_NONNULL_ALL
 void
 os_unfair_lock_lock_inline(os_unfair_lock_t lock)
 {
-    if (!_pthread_has_direct_tsd()) return os_unfair_lock_lock(lock);
-    uint32_t mts = (uint32_t)(uintptr_t)_pthread_getspecific_direct(
-            _PTHREAD_TSD_SLOT_MACH_THREAD_SELF);
-    os_unfair_lock unlocked = OS_UNFAIR_LOCK_UNLOCKED, locked = { mts };
-    if (!OSLOCK_STD(atomic_compare_exchange_strong_explicit)(
-            (_os_atomic_unfair_lock*)lock, &unlocked, locked,
-            OSLOCK_STD(memory_order_acquire),
-            OSLOCK_STD(memory_order_relaxed))) {
-        return os_unfair_lock_lock(lock);
-    }
+	if (!_pthread_has_direct_tsd()) return os_unfair_lock_lock(lock);
+	uint32_t mts = (uint32_t)(uintptr_t)_pthread_getspecific_direct(
+			_PTHREAD_TSD_SLOT_MACH_THREAD_SELF);
+	os_unfair_lock unlocked = OS_UNFAIR_LOCK_UNLOCKED, locked = { mts };
+	if (!OSLOCK_STD(atomic_compare_exchange_strong_explicit)(
+			(_os_atomic_unfair_lock*)lock, &unlocked, locked,
+			OSLOCK_STD(memory_order_acquire),
+			OSLOCK_STD(memory_order_relaxed))) {
+		return os_unfair_lock_lock(lock);
+	}
 }
 
 /*!
@@ -646,20 +646,20 @@ OS_UNFAIR_LOCK_AVAILABILITY
 OS_INLINE OS_ALWAYS_INLINE OS_NONNULL_ALL
 void
 os_unfair_lock_lock_with_options_inline(os_unfair_lock_t lock,
-        os_unfair_lock_options_t options)
+		os_unfair_lock_options_t options)
 {
-    if (!_pthread_has_direct_tsd()) {
-        return os_unfair_lock_lock_with_options(lock, options);
-    }
-    uint32_t mts = (uint32_t)(uintptr_t)_pthread_getspecific_direct(
-            _PTHREAD_TSD_SLOT_MACH_THREAD_SELF);
-    os_unfair_lock unlocked = OS_UNFAIR_LOCK_UNLOCKED, locked = { mts };
-    if (!OSLOCK_STD(atomic_compare_exchange_strong_explicit)(
-            (_os_atomic_unfair_lock*)lock, &unlocked, locked,
-            OSLOCK_STD(memory_order_acquire),
-            OSLOCK_STD(memory_order_relaxed))) {
-        return os_unfair_lock_lock_with_options(lock, options);
-    }
+	if (!_pthread_has_direct_tsd()) {
+		return os_unfair_lock_lock_with_options(lock, options);
+	}
+	uint32_t mts = (uint32_t)(uintptr_t)_pthread_getspecific_direct(
+			_PTHREAD_TSD_SLOT_MACH_THREAD_SELF);
+	os_unfair_lock unlocked = OS_UNFAIR_LOCK_UNLOCKED, locked = { mts };
+	if (!OSLOCK_STD(atomic_compare_exchange_strong_explicit)(
+			(_os_atomic_unfair_lock*)lock, &unlocked, locked,
+			OSLOCK_STD(memory_order_acquire),
+			OSLOCK_STD(memory_order_relaxed))) {
+		return os_unfair_lock_lock_with_options(lock, options);
+	}
 }
 
 /*!
@@ -685,13 +685,13 @@ OS_INLINE OS_ALWAYS_INLINE OS_WARN_RESULT OS_NONNULL_ALL
 bool
 os_unfair_lock_trylock_inline(os_unfair_lock_t lock)
 {
-    if (!_pthread_has_direct_tsd()) return os_unfair_lock_trylock(lock);
-    uint32_t mts = (uint32_t)(uintptr_t)_pthread_getspecific_direct(
-            _PTHREAD_TSD_SLOT_MACH_THREAD_SELF);
-    os_unfair_lock unlocked = OS_UNFAIR_LOCK_UNLOCKED, locked = { mts };
-    return OSLOCK_STD(atomic_compare_exchange_strong_explicit)(
-            (_os_atomic_unfair_lock*)lock, &unlocked, locked,
-            OSLOCK_STD(memory_order_acquire), OSLOCK_STD(memory_order_relaxed));
+	if (!_pthread_has_direct_tsd()) return os_unfair_lock_trylock(lock);
+	uint32_t mts = (uint32_t)(uintptr_t)_pthread_getspecific_direct(
+			_PTHREAD_TSD_SLOT_MACH_THREAD_SELF);
+	os_unfair_lock unlocked = OS_UNFAIR_LOCK_UNLOCKED, locked = { mts };
+	return OSLOCK_STD(atomic_compare_exchange_strong_explicit)(
+			(_os_atomic_unfair_lock*)lock, &unlocked, locked,
+			OSLOCK_STD(memory_order_acquire), OSLOCK_STD(memory_order_relaxed));
 }
 
 /*!
@@ -708,16 +708,16 @@ OS_INLINE OS_ALWAYS_INLINE OS_NONNULL_ALL
 void
 os_unfair_lock_unlock_inline(os_unfair_lock_t lock)
 {
-    if (!_pthread_has_direct_tsd()) return os_unfair_lock_unlock(lock);
-    uint32_t mts = (uint32_t)(uintptr_t)_pthread_getspecific_direct(
-            _PTHREAD_TSD_SLOT_MACH_THREAD_SELF);
-    os_unfair_lock unlocked = OS_UNFAIR_LOCK_UNLOCKED, locked = { mts };
-    if (!OSLOCK_STD(atomic_compare_exchange_strong_explicit)(
-            (_os_atomic_unfair_lock*)lock, &locked, unlocked,
-            OSLOCK_STD(memory_order_release),
-            OSLOCK_STD(memory_order_relaxed))) {
-        return os_unfair_lock_unlock(lock);
-    }
+	if (!_pthread_has_direct_tsd()) return os_unfair_lock_unlock(lock);
+	uint32_t mts = (uint32_t)(uintptr_t)_pthread_getspecific_direct(
+			_PTHREAD_TSD_SLOT_MACH_THREAD_SELF);
+	os_unfair_lock unlocked = OS_UNFAIR_LOCK_UNLOCKED, locked = { mts };
+	if (!OSLOCK_STD(atomic_compare_exchange_strong_explicit)(
+			(_os_atomic_unfair_lock*)lock, &locked, unlocked,
+			OSLOCK_STD(memory_order_release),
+			OSLOCK_STD(memory_order_relaxed))) {
+		return os_unfair_lock_unlock(lock);
+	}
 }
 
 /*!
@@ -736,14 +736,14 @@ OS_INLINE OS_ALWAYS_INLINE OS_NONNULL_ALL
 void
 os_unfair_lock_lock_inline_no_tsd_4libpthread(os_unfair_lock_t lock)
 {
-    uint32_t mts = MACH_PORT_DEAD;
-    os_unfair_lock unlocked = OS_UNFAIR_LOCK_UNLOCKED, locked = { mts };
-    if (!OSLOCK_STD(atomic_compare_exchange_strong_explicit)(
-            (_os_atomic_unfair_lock*)lock, &unlocked, locked,
-            OSLOCK_STD(memory_order_acquire),
-            OSLOCK_STD(memory_order_relaxed))) {
-        return os_unfair_lock_lock_no_tsd_4libpthread(lock);
-    }
+	uint32_t mts = MACH_PORT_DEAD;
+	os_unfair_lock unlocked = OS_UNFAIR_LOCK_UNLOCKED, locked = { mts };
+	if (!OSLOCK_STD(atomic_compare_exchange_strong_explicit)(
+			(_os_atomic_unfair_lock*)lock, &unlocked, locked,
+			OSLOCK_STD(memory_order_acquire),
+			OSLOCK_STD(memory_order_relaxed))) {
+		return os_unfair_lock_lock_no_tsd_4libpthread(lock);
+	}
 }
 
 /*!
@@ -762,14 +762,14 @@ OS_INLINE OS_ALWAYS_INLINE OS_NONNULL_ALL
 void
 os_unfair_lock_unlock_inline_no_tsd_4libpthread(os_unfair_lock_t lock)
 {
-    uint32_t mts = MACH_PORT_DEAD;
-    os_unfair_lock unlocked = OS_UNFAIR_LOCK_UNLOCKED, locked = { mts };
-    if (!OSLOCK_STD(atomic_compare_exchange_strong_explicit)(
-            (_os_atomic_unfair_lock*)lock, &locked, unlocked,
-            OSLOCK_STD(memory_order_release),
-            OSLOCK_STD(memory_order_relaxed))) {
-        return os_unfair_lock_unlock_no_tsd_4libpthread(lock);
-    }
+	uint32_t mts = MACH_PORT_DEAD;
+	os_unfair_lock unlocked = OS_UNFAIR_LOCK_UNLOCKED, locked = { mts };
+	if (!OSLOCK_STD(atomic_compare_exchange_strong_explicit)(
+			(_os_atomic_unfair_lock*)lock, &locked, unlocked,
+			OSLOCK_STD(memory_order_release),
+			OSLOCK_STD(memory_order_relaxed))) {
+		return os_unfair_lock_unlock_no_tsd_4libpthread(lock);
+	}
 }
 
 OS_ASSUME_NONNULL_END
