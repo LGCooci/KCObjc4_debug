@@ -1,6 +1,8 @@
 # objc_debug
 可编译苹果官方源码objc！可编译源码，LLDB调试，方便大家探索学习！
 
+苹果开源 ：macos 最新 10.15.6 objc版本：781
+
 [![Build Status](https://travis-ci.org/LGCooci/objc4_debug.svg?branch=master)](https://travis-ci.org/LGCooci/objc4_debug)
 [![Xcode 10.0+](https://img.shields.io/badge/Xcode-10.0%2B-blue.svg?colorA=3caefc&colorB=24292e)](https://developer.apple.com/xcode/)
 [![VSTS Build](https://alchemistxxd.visualstudio.com/_apis/public/build/definitions/e0656143-5484-4af8-8aa3-01f9baba5da1/1/badge)](https://alchemistxxd.visualstudio.com/Apple%20Open%20Source/_git/objc4)
