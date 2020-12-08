@@ -1,7 +1,7 @@
 # objc_debug
 可编译苹果官方源码objc！可编译源码，LLDB调试，方便大家探索学习！
 
-2020年12月08号更新: objc 781源码 在 苹果最新系统bigSur xcode 12.2 编译报错! 暂时不方便处理, 大家敬请期待opensource 开源!
+> 2020年12月08号更新: objc 781源码 在 苹果最新系统bigSur xcode 12.2 编译报错! 暂时不方便处理, 大家敬请期待opensource 开源!
 
 苹果开源 ：macos 最新 10.15.6 objc版本：781
 
