@@ -1,9 +1,8 @@
 # objc_debug
+
 可编译苹果官方源码objc！可编译源码，LLDB调试，方便大家探索学习！
 
-> 2020年12月08号更新: objc 781源码 在 苹果最新系统bigSur xcode 12.2 编译报错! 暂时不方便处理, 大家敬请期待opensource 开源!
-
-苹果开源 ：macos 最新 10.15.6 objc版本：781
+> ⚠️ 2021年1月5号更新: 在苹果系统 `bigSur` (`macOS 11`) `xcode 12.2` 源码编译报错的问题解决! 大家及时更新源码 **`objc4-818.2`** ⚠️
 
 [![Build Status](https://travis-ci.org/LGCooci/objc4_debug.svg?branch=master)](https://travis-ci.org/LGCooci/objc4_debug)
 [![Xcode 10.0+](https://img.shields.io/badge/Xcode-10.0%2B-blue.svg?colorA=3caefc&colorB=24292e)](https://developer.apple.com/xcode/)
@@ -13,7 +12,7 @@
 [![Join the chat at https://gitter.im/0xxd0/objc4](https://badges.gitter.im/0xxd0/objc4.svg)](https://gitter.im/0xxd0/objc4?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-![](https://github.com/LGCooci/objc_debug/blob/master/objc4-756.png)
+![](资源图片/objc4-818.2.png)
 
 
 > 很多小伙伴在探索底层的时候经常很苦恼，只能靠猜测！稍微灵活一点的小伙伴会通过 `Apple` 提供的源码来辅助看一下，但是很显然这不太直观！如果能够直接编译调试，像我们自己的代码直接 LLDB 调试，流程跟踪。那简直不要太爽，于是我编译了现在最新的`iOS_objc4-756.2` 
