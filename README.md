@@ -2,7 +2,9 @@
 
 可编译苹果官方源码objc！可编译源码，LLDB调试，方便大家探索学习！
 
-> ⚠️ 2021年1月5号更新: 在苹果系统 `bigSur` (`macOS 11`) `xcode 12.2` 源码编译报错的问题解决! 大家及时更新源码 **`objc4-818.2`** ⚠️
+> ⚠️ 2021年4月26号更新 编译调试成功 `libmalloc-317.40.8` 方便进行 `objc` 下层申请开辟内存情况调试  
+
+> ⚠️ 2021年1月5号更新: 在苹果系统 `bigSur` (`macOS 11`) `xcode 12.2` 源码编译报错的问题解决! 大家及时更新源码 **`objc4-818.2`** 
 
 [![Build Status](https://travis-ci.org/LGCooci/objc4_debug.svg?branch=master)](https://travis-ci.org/LGCooci/objc4_debug)
 [![Xcode 10.0+](https://img.shields.io/badge/Xcode-10.0%2B-blue.svg?colorA=3caefc&colorB=24292e)](https://developer.apple.com/xcode/)

@@ -1,0 +1,124 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		92D71A2B1B99355C00108CA1 /* stress_test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = stress_test.c; path = ../tests/stress_test.c; sourceTree = "<group>"; };
+		92D71A321B99364200108CA1 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		92D71A1C1B99354500108CA1 = {
+			isa = PBXGroup;
+			children = (
+				92D71A321B99364200108CA1 /* Makefile */,
+				92D71A2B1B99355C00108CA1 /* stress_test.c */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		92D71A211B99354500108CA1 /* libmalloc_tests */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 92D71A241B99354500108CA1 /* Build configuration list for PBXLegacyTarget "libmalloc_tests" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			dependencies = (
+			);
+			name = libmalloc_tests;
+			passBuildSettingsInEnvironment = 1;
+			productName = libmalloc_tests;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		92D71A1D1B99354500108CA1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Apple Inc";
+				TargetAttributes = {
+					92D71A211B99354500108CA1 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
+			};
+			buildConfigurationList = 92D71A201B99354500108CA1 /* Build configuration list for PBXProject "libmalloc_tests" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 92D71A1C1B99354500108CA1;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				92D71A211B99354500108CA1 /* libmalloc_tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		92D71A221B99354500108CA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		92D71A231B99354500108CA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		92D71A251B99354500108CA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx.internal;
+				SUPPORTED_PLATFORMS = "macosx iphoneos appletvos watchos";
+			};
+			name = Debug;
+		};
+		92D71A261B99354500108CA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx.internal;
+				SUPPORTED_PLATFORMS = "macosx iphoneos appletvos watchos";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		92D71A201B99354500108CA1 /* Build configuration list for PBXProject "libmalloc_tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92D71A221B99354500108CA1 /* Debug */,
+				92D71A231B99354500108CA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92D71A241B99354500108CA1 /* Build configuration list for PBXLegacyTarget "libmalloc_tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92D71A251B99354500108CA1 /* Debug */,
+				92D71A261B99354500108CA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 92D71A1D1B99354500108CA1 /* Project object */;
+}
