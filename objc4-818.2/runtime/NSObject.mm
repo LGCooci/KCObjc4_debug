@@ -39,6 +39,7 @@
 #include <map>
 #include <execinfo.h>
 #include "NSObject-internal.h"
+
 //#include <os/feature_private.h>
 
 extern "C" {
@@ -406,14 +407,13 @@ storeWeak(id *location, objc_object *newObj)
         if (!newObj->isTaggedPointerOrNil()) {
             newObj->setWeaklyReferenced_nolock();
         }
-
         // Do not set *location anywhere else. That would introduce a race.
         *location = (id)newObj;
     }
     else {
         // No new value. The storage is not changed.
     }
-    
+
     SideTable::unlockTwo<haveOld, haveNew>(oldTable, newTable);
 
     // This must be called without the locks held, as it can invoke

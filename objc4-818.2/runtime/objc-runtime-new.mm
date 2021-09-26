@@ -173,8 +173,8 @@ STATIC_ASSERT((ISA_MASK & ISA_MAGIC_MASK) == 0);
 STATIC_ASSERT((~ISA_MAGIC_MASK & ISA_MAGIC_VALUE) == 0);
 
 // die if virtual address space bound goes up
-STATIC_ASSERT((~ISA_MASK & MACH_VM_MAX_ADDRESS) == 0  ||  
-              ISA_MASK + sizeof(void*) == MACH_VM_MAX_ADDRESS);
+//STATIC_ASSERT((~ISA_MASK & MACH_VM_MAX_ADDRESS) == 0  ||
+//              ISA_MASK + sizeof(void*) == MACH_VM_MAX_ADDRESS);
 
 // SUPPORT_PACKED_ISA
 #else
