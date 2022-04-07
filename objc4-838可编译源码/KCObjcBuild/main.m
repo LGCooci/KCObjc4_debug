@@ -11,10 +11,12 @@
  ②: enable hardened runtime -> NO
  ③: build phase -> denpendenice -> objc
  ④: team 选择 None
- iOS进阶内容重磅分享 认准: KC_Cooci 麻烦来一个 👍
+ iOS进阶内容重磅分享 微信认准: KC_Cooci 麻烦来一个 👍
  */
 
 #import <Foundation/Foundation.h>
+#import "LGPerson.h"
+extern void _objc_autoreleasePoolPrint(void);
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -22,5 +24,7 @@ int main(int argc, const char * argv[]) {
         NSObject *objc = [NSObject alloc];
         NSLog(@"开心调试 %@ 底层源码",objc);
     }
+    
+
     return 0;
 }

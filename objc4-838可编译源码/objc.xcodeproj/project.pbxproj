@@ -44,6 +44,7 @@
 
 /* Begin PBXBuildFile section */
 		04A8FF5027C7CBA7002F0027 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A8FF4F27C7CBA7002F0027 /* main.m */; };
+		04BA60BB27D5EF7D000F7694 /* LGPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BA60BA27D5EF7D000F7694 /* LGPerson.m */; };
 		393CEAC00DC69E3E000B69DE /* objc-references.mm in Sources */ = {isa = PBXBuildFile; fileRef = 393CEABF0DC69E3E000B69DE /* objc-references.mm */; };
 		393CEAC60DC69E67000B69DE /* objc-references.h in Headers */ = {isa = PBXBuildFile; fileRef = 393CEAC50DC69E67000B69DE /* objc-references.h */; };
 		39ABD72312F0B61800D1054C /* objc-weak.h in Headers */ = {isa = PBXBuildFile; fileRef = 39ABD71F12F0B61800D1054C /* objc-weak.h */; };
@@ -224,6 +225,8 @@
 /* Begin PBXFileReference section */
 		04A8FF4D27C7CBA7002F0027 /* KCObjcBuild */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KCObjcBuild; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A8FF4F27C7CBA7002F0027 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		04BA60B927D5EF7D000F7694 /* LGPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGPerson.h; sourceTree = "<group>"; };
+		04BA60BA27D5EF7D000F7694 /* LGPerson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGPerson.m; sourceTree = "<group>"; };
 		393CEABF0DC69E3E000B69DE /* objc-references.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "objc-references.mm"; path = "runtime/objc-references.mm"; sourceTree = "<group>"; };
 		393CEAC50DC69E67000B69DE /* objc-references.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-references.h"; path = "runtime/objc-references.h"; sourceTree = "<group>"; };
 		39ABD71F12F0B61800D1054C /* objc-weak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-weak.h"; path = "runtime/objc-weak.h"; sourceTree = "<group>"; };
@@ -388,6 +391,8 @@
 			isa = PBXGroup;
 			children = (
 				04A8FF4F27C7CBA7002F0027 /* main.m */,
+				04BA60B927D5EF7D000F7694 /* LGPerson.h */,
+				04BA60BA27D5EF7D000F7694 /* LGPerson.m */,
 			);
 			path = KCObjcBuild;
 			sourceTree = "<group>";
@@ -872,6 +877,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04A8FF5027C7CBA7002F0027 /* main.m in Sources */,
+				04BA60BB27D5EF7D000F7694 /* LGPerson.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -981,7 +987,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1039,7 +1045,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1092,6 +1098,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_CURRENT_VERSION = 228;
+				ENABLE_HARDENED_RUNTIME = NO;
 				EXCLUDED_SOURCE_FILE_NAMES = "dummy-library-mac-i386.c";
 				"EXCLUDED_SOURCE_FILE_NAMES[sdk=macosx*][arch=i386]" = "*";
 				EXECUTABLE_PREFIX = lib;
@@ -1182,6 +1189,7 @@
 				"COPY_HEADERS_UNIFDEF_FLAGS[sdk=macosx*]" = "-DBUILD_FOR_OSX";
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_CURRENT_VERSION = 228;
+				ENABLE_HARDENED_RUNTIME = NO;
 				EXCLUDED_SOURCE_FILE_NAMES = "dummy-library-mac-i386.c";
 				"EXCLUDED_SOURCE_FILE_NAMES[sdk=macosx*][arch=i386]" = "*";
 				EXECUTABLE_PREFIX = lib;

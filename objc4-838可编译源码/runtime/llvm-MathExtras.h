@@ -13,8 +13,17 @@
 
 // Taken from llvmCore-3425.0.31.
 
+
 #ifndef LLVM_SUPPORT_MATHEXTRAS_H
 #define LLVM_SUPPORT_MATHEXTRAS_H
+
+#define UINT64_C(v)  (v ## ULL)
+#define INT64_C(v)   (v ## LL)
+
+typedef unsigned long long uint64_t;
+typedef unsigned int uint32_t;
+typedef unsigned short uint16_t;
+typedef unsigned char uint8_t;
 
 namespace objc {
 
@@ -33,23 +42,22 @@ inline uint32_t Lo_32(uint64_t Value) {
 }
 
 /// isInt - Checks if an integer fits into the given bit width.
-template<unsigned N>
-inline bool isInt(int64_t x) {
-  return N >= 64 || (-(INT64_C(1)<<(N-1)) <= x && x < (INT64_C(1)<<(N-1)));
-}
+
 // Template specializations to get better code for common cases.
-template<>
-inline bool isInt<8>(int64_t x) {
-  return static_cast<int8_t>(x) == x;
-}
-template<>
-inline bool isInt<16>(int64_t x) {
-  return static_cast<int16_t>(x) == x;
-}
-template<>
-inline bool isInt<32>(int64_t x) {
-  return static_cast<int32_t>(x) == x;
-}
+//template<>
+//inline bool isInt<8>(int64_t x) {
+//  return static_cast<int8_t>(x) == x;
+//}
+//
+//template<>
+//inline bool isInt<16>(int64_t x) {
+//  return static_cast<int16_t>(x) == x;
+//}
+
+//template<>
+//inline bool isInt<32>(int64_t x) {
+//  return static_cast<int32_t>(x) == x;
+//}
 
 /// isShiftedInt<N,S> - Checks if a signed integer is an N bit number shifted
 ///                     left by S.
