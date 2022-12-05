@@ -522,7 +522,7 @@ bool cache_t::shouldFlush(SEL sel, IMP imp) const
     if (!isConstantOptimizedCache(/*strict*/true)) {
         const preopt_cache_t *cache = disguised_preopt_cache();
         if (cache) {
-            uintptr_t offs = (uintptr_t)sel - (uintptr_t)@selector(🤯);
+            uintptr_t offs = (uintptr_t)sel - (uintptr_t)sharedCacheRelativeMethodBase();
             uintptr_t slot = ((offs >> cache->shift) & cache->mask);
             auto &entry = cache->entries[slot];
 

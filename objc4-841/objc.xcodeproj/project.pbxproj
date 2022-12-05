@@ -44,6 +44,7 @@
 
 /* Begin PBXBuildFile section */
 		04063FFF2862F55300EB54EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04063FFE2862F55300EB54EA /* main.m */; };
+		049993C1293DEB560085D513 /* objc-magicsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 049993C0293DEB560085D513 /* objc-magicsel.m */; };
 		393CEAC00DC69E3E000B69DE /* objc-references.mm in Sources */ = {isa = PBXBuildFile; fileRef = 393CEABF0DC69E3E000B69DE /* objc-references.mm */; };
 		393CEAC60DC69E67000B69DE /* objc-references.h in Headers */ = {isa = PBXBuildFile; fileRef = 393CEAC50DC69E67000B69DE /* objc-references.h */; };
 		39ABD72312F0B61800D1054C /* objc-weak.h in Headers */ = {isa = PBXBuildFile; fileRef = 39ABD71F12F0B61800D1054C /* objc-weak.h */; };
@@ -224,6 +225,7 @@
 /* Begin PBXFileReference section */
 		04063FFC2862F55300EB54EA /* KCObjcBuild */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KCObjcBuild; sourceTree = BUILT_PRODUCTS_DIR; };
 		04063FFE2862F55300EB54EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		049993C0293DEB560085D513 /* objc-magicsel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "objc-magicsel.m"; path = "runtime/objc-magicsel.m"; sourceTree = "<group>"; };
 		393CEABF0DC69E3E000B69DE /* objc-references.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "objc-references.mm"; path = "runtime/objc-references.mm"; sourceTree = "<group>"; };
 		393CEAC50DC69E67000B69DE /* objc-references.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-references.h"; path = "runtime/objc-references.h"; sourceTree = "<group>"; };
 		39ABD71F12F0B61800D1054C /* objc-weak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-weak.h"; path = "runtime/objc-weak.h"; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				049993C0293DEB560085D513 /* objc-magicsel.m */,
 				C2EB731C23D8A38A0040672B /* dummy-library-mac-i386.c */,
 				838485B80D6D687300CEA253 /* hashtable2.mm */,
 				838485BC0D6D687300CEA253 /* maptable.mm */,
@@ -916,6 +919,7 @@
 				830F2A740D737FB800392440 /* objc-msg-arm.s in Sources */,
 				830F2A750D737FB900392440 /* objc-msg-i386.s in Sources */,
 				830F2A7D0D737FBB00392440 /* objc-msg-x86_64.s in Sources */,
+				049993C1293DEB560085D513 /* objc-magicsel.m in Sources */,
 				830F2A950D73876100392440 /* objc-accessors.mm in Sources */,
 				393CEAC00DC69E3E000B69DE /* objc-references.mm in Sources */,
 				831C85D60E10CF850066E64C /* objc-os.mm in Sources */,

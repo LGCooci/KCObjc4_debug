@@ -105,6 +105,7 @@
 // class is a metaclass (copied from ro)
 #define RW_META               RO_META // (1<<0)
 
+// All shared cache relative method lists names are offsets from this selector.
 
 // NOTE: MORE RW_ FLAGS DEFINED BELOW
 
@@ -757,6 +758,9 @@ namespace objc {
 // Let method_t::small use this from objc-private.h.
 static inline bool inSharedCache(uintptr_t ptr);
 }
+// All shared cache relative method lists names are offsets from this selector.
+extern "C" uintptr_t sharedCacheRelativeMethodBase();
+
 
 struct method_t {
     static const uint32_t smallMethodListFlag = 0x80000000;
@@ -806,9 +810,9 @@ public:
     static const auto smallSize = sizeof(struct small);
 
     // All shared cache relative method lists names are offsets from this selector.
-    static uintptr_t sharedCacheRelativeMethodBase() {
-        return (uintptr_t)@selector(🤯);
-    }
+//    static uintptr_t sharedCacheRelativeMethodBase() {
+//        return (uintptr_t)@selector(🤯);
+//    }
 
     // The pointer modifier used with method lists. When the method
     // list contains small methods, set the bottom bit of the pointer.
